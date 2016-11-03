@@ -1,0 +1,1 @@
+angular.module('CraigslistApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'PostCtrl', 'PostService']);

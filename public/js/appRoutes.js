@@ -9,11 +9,11 @@
             controller: 'MainController'
         })
 
-        // posts page that will use the PostController
-        .when('/posts', {
-            templateUrl: 'views/posts.html',
-            controller: 'PostController'
+        .when('/classified/:id', {
+            templateUrl: 'views/classified.html',
+            controller: 'ClassifiedController'
         });
+
 
     $locationProvider.html5Mode(true);
 

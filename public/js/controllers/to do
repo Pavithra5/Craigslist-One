@@ -1,0 +1,9 @@
+Post categories - Housing, Services, For Sale, Jobs
+Housing:
+Fields: Post id, short desc, price, location, area, bhk, amenities, posting date, update date, images, description, category, sub category
+
+Sale:
+Fields: Post id, category, sub category, post date, update date, short desc, price, dimensions, description, condition, images
+
+Vehicles: 
+Fields: Post id, post date, update date, make, model, year, transmission, fuel type, mileage(odometer reading), price, description, condition, images

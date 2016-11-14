@@ -29,7 +29,7 @@ var Classified = require('./models/classified');
         });
 
         app.get('/api/classified/:id', function(req, res){
-            var testClassified = {
+           /* var testClassified = {
                 'id':'234234234',
                 'shortDesc':'2006 CADILLAC STS SEADAN 3.6 - $4999 (SEAGOVILLE)',
                 'postedDate': '11/1/2016', 
@@ -44,9 +44,15 @@ var Classified = require('./models/classified');
                 'description': '2006 CADILLAC STS 4DR. SEDAN,3.6,AUTO,COLD A/C,LEATHER SEATS,HEATED SEATS.,POWER W/L/M/S,POWER SUNROOF,BUCKET SEATS,WOOD GRAIN TRIM,TILT/CRUISE,TINTED GLASS,CHROME WHEELS,NEW TIRES,REAR SPOILER,RUNS AND DRIVES GREAT,SUPER CLEAN', 
                 'condition':'CLEAN', 
                 'image': 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg' 
-            };
+            };*/
 
-            res.json(testClassified);
+            Classified.findById("234234234",function(error,post) {
+                console.log(post);
+                res.json(post);  
+                
+            });           
+
+            
         });
 
 

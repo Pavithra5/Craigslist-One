@@ -7,3 +7,4 @@ Fields: Post id, category, sub category, post date, update date, short desc, pri
 
 Vehicles: 
 Fields: Post id, post date, update date, make, model, year, transmission, fuel type, mileage(odometer reading), price, description, condition, images
+

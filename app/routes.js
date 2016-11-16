@@ -7,23 +7,6 @@ var Classified = require('./models/classified');
         // handle things like api calls
         // authentication routes
 
-        // sample api route
-       /* app.get('/api/posts', function(req, res) {
-            var testPosts = {
-                    "name": "Test1"
-                };
-            // use mongoose to get all posts in the database
-            Post.find(function(err, posts) {
-
-                if (err)
-                    res.send(err);
-                
-                res.json(posts); // return all posts in JSON format
-            });
-
-            res.json(testPosts);
-        });*/
-
         app.get('/api/classified/new', function(req, res){
             res.json(new Classified());
         });
@@ -50,9 +33,52 @@ var Classified = require('./models/classified');
                 console.log(post);
                 res.json(post);  
                 
-            });           
+            });
+        });
 
+        app.get('/api/classifieds', function(req, res) {
+            var testList = [{
+                _id: '101',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            }, 
+            {
+                _id: '102',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            },
+            {
+                _id: '103',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            },
+            {
+                _id: '104',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            },
+            {
+                _id: '105',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            }];
             
+            res.json(testList);
         });
 
 
@@ -61,11 +87,5 @@ var Classified = require('./models/classified');
         app.get('*', function(req, res) {
             res.sendfile('./public/index.html'); // load our public/index.html file
         });
-
-        app.get('/classified/:id', function(req, res) {
-            res.sendfile('./public/views/classified.html'); // load our posts html file
-        });      
-
-
     };
 

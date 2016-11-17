@@ -11,11 +11,18 @@ var Classified = require('./models/classified');
 
 
         app.get('/api/classified/show', function(req, res){
-            console.log("yay");   
-            Category.findById("1", function(err, users) {
+             
+            Category.find({}, function(err, users) {
                 if (err) throw err;
                 console.log(users);
             });            
+           /* Category.find({ }, function(error, story) {
+  if (error) {
+    return handleError(error);
+  }
+  
+  console.log(story); // prints "Aaron"
+});*/
 
         });
 

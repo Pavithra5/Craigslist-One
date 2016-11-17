@@ -1,7 +1,7 @@
-
 //var Classified = require('./models/classified');
 var Category=require('./models/category');
 //var Subcategory=require('./models/subcategory');
+var Classified = require('./models/classified');
     
     module.exports = function(app) {
 
@@ -9,35 +9,15 @@ var Category=require('./models/category');
         // handle things like api calls
         // authentication routes
 
-        // sample api route
-       /* app.get('/api/posts', function(req, res) {
-            var testPosts = {
-                    "name": "Test1"
-                };
-            // use mongoose to get all posts in the database
-            Post.find(function(err, posts) {
 
-                if (err)
-                    res.send(err);
-                
-                res.json(posts); // return all posts in JSON format
-            });
+        app.get('/api/classified/show', function(req, res){
+            console.log("yay");   
+            Category.find({}, function(err, users) {
+                if (err) throw err;
+                console.log(users);
+            });            
 
-            res.json(testPosts);
-        });*/
-app.get('/api/classified/show', function(req, res){
-    console.log("yay");   
-    Category.findById("1", function(err, users) {
-  if (err) throw err;
-
-  // object of all the users
-  console.log(users);
-});
-
-            
         });
-
-
 
 
         app.get('/api/classified/new', function(req, res){
@@ -62,14 +42,55 @@ app.get('/api/classified/show', function(req, res){
                 'image': 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg' 
             };*/
 
-            
             Classified.findById(req.params.id,function(error,post) {
-                
                 res.json(post);  
                 
-            });           
+            });
+        });
 
+        app.get('/api/classifieds', function(req, res) {
+            var testList = [{
+                _id: '101',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            }, 
+            {
+                _id: '102',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            },
+            {
+                _id: '103',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            },
+            {
+                _id: '104',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            },
+            {
+                _id: '105',
+                pDate: '11/1/2016',
+                shortDesc: 'Short description goes here',
+                location: 'location',
+                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
+                price: 5000
+            }];
             
+            res.json(testList);
         });
 
 
@@ -78,17 +99,4 @@ app.get('/api/classified/show', function(req, res){
         app.get('*', function(req, res) {
             res.sendfile('./public/index.html'); // load our public/index.html file
         });
-
-        app.get('/classified/:id', function(req, res) {
-            res.sendfile('./public/views/classified.html'); // load our posts html file
-        });      
-
-
-
-
-
-
-
-
     };
-

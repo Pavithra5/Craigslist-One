@@ -4,18 +4,23 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //create a schema
+
+
 var categorySchema = new Schema({
-	_id:Number,
-	name:String,
-	_id:[{ type: Number, ref: 'subcategory' }],
-	category_id:[{ type: Number, ref: 'subcategory' }],
-	name:[{ type: String, ref: 'subcategory' }]
+	_id:Schema.Types.ObjectId,
+	//name:String,
+	//subcatid:[Number],
+	//subcatname:[String],
+	
 
 });
 
 
+
+
+
 //create a model usiing the schema
-var Category = mongoose.model('category', categorySchema,'category');
+var Category = mongoose.model('catsubcat', categorySchema,'catsubcat');
 
 //make this available to the users in the application
 module.exports = Category;

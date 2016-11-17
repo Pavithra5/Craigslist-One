@@ -5,8 +5,8 @@ var Schema = mongoose.Schema;
 
 //create a schema
 var subcategorySchema = new Schema({
-	_id:Number,
-	category_id:Number,
+	_id:Schema.Types.ObjectId,
+	category_id:Schema.Types.ObjectId,
 	name:String
 	
 
@@ -14,7 +14,7 @@ var subcategorySchema = new Schema({
 
 
 //create a model usiing the schema
-var Subcategory = mongoose.model('subcategory', subcategorySchema);
+var Subcategory = mongoose.model('subcategory', subcategorySchema,'subcategory');
 
 //make this available to the users in the application
 module.exports = Subcategory;

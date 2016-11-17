@@ -1,6 +1,6 @@
 //var Classified = require('./models/classified');
 var Category=require('./models/category');
-//var Subcategory=require('./models/subcategory');
+var Subcategory=require('./models/subcategory');
 var Classified = require('./models/classified');
     
     module.exports = function(app) {
@@ -12,10 +12,29 @@ var Classified = require('./models/classified');
 
         app.get('/api/classified/show', function(req, res){
              
-            Category.find({}, function(err, users) {
+            var query = Category.find({}).select('name');
+            /*Category.find({}, function(err, users) {
                 if (err) throw err;
                 console.log(users);
-            });            
+            });   */
+            query.exec(function (err, someValue) {
+        if (err) return next(err);
+        console.log(someValue);
+    });
+
+            
+            
+
+
+
+            
+            
+
+
+
+
+
+
            /* Category.find({ }, function(error, story) {
   if (error) {
     return handleError(error);

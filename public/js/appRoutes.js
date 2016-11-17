@@ -12,6 +12,11 @@
         .when('/classified/:id', {
             templateUrl: 'views/classified.html',
             controller: 'ClassifiedController'
+        })
+
+        .when('/classifieds/', {
+            templateUrl: 'views/listing.html',
+            controller: 'ListingController'
         });
 
         

@@ -27,7 +27,7 @@ var Category=require('./models/category');
         });*/
 app.get('/api/classified/show', function(req, res){
     console.log("yay");   
-    Category.find({}, function(err, users) {
+    Category.findById("1", function(err, users) {
   if (err) throw err;
 
   // object of all the users

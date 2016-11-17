@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //create a schema
-var classifiedSchema = new Schema({
+var categorySchema = new Schema({
 	_id:Number,
 	
 	name:String
@@ -12,7 +12,7 @@ var classifiedSchema = new Schema({
 
 
 //create a model usiing the schema
-var Classified = mongoose.model('category', classifiedSchema);
+var Category = mongoose.model('category', categorySchema);
 
 //make this available to the users in the application
-module.exports = Classified;
+module.exports = Category;

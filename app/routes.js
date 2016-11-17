@@ -1,5 +1,7 @@
 
-var Classified = require('./models/classified');
+//var Classified = require('./models/classified');
+var Category=require('./models/category');
+//var Subcategory=require('./models/subcategory');
     
     module.exports = function(app) {
 
@@ -23,6 +25,20 @@ var Classified = require('./models/classified');
 
             res.json(testPosts);
         });*/
+app.get('/api/classified/show', function(req, res){
+    console.log("yay");   
+    Category.find({}, function(err, users) {
+  if (err) throw err;
+
+  // object of all the users
+  console.log(users);
+});
+
+            
+        });
+
+
+
 
         app.get('/api/classified/new', function(req, res){
             res.json(new Classified());
@@ -46,8 +62,9 @@ var Classified = require('./models/classified');
                 'image': 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg' 
             };*/
 
-            Classified.findById("234234234",function(error,post) {
-                console.log(post);
+            
+            Classified.findById(req.params.id,function(error,post) {
+                
                 res.json(post);  
                 
             });           
@@ -65,6 +82,12 @@ var Classified = require('./models/classified');
         app.get('/classified/:id', function(req, res) {
             res.sendfile('./public/views/classified.html'); // load our posts html file
         });      
+
+
+
+
+
+
 
 
     };

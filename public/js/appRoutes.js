@@ -14,6 +14,8 @@
             controller: 'ClassifiedController'
         });
 
+        
+
 
     $locationProvider.html5Mode(true);
 

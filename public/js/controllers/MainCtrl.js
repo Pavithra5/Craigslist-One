@@ -3,8 +3,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
 
 	$http.get('/api/categories/')
 	.success(function(data){
-		$.each(data, function(index, value){
-			var count = 0;
+		angular.forEach(data, function(value){
 			value.length = value.subcategories.length;
 		});
        $scope.categories = data;

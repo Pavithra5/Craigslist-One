@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 
 //create a schema
 var subcategorySchema = new Schema({
-	_id:Number,
+	_id:Schema.Types.ObjectId,
+	user_id:Schema.Types.ObjectId,
 	
 	name:String
 	

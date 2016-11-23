@@ -10,17 +10,28 @@ var Classified = require('./models/classified');
         // authentication routes
 
 
-        app.get('/api/classified/show', function(req, res){
+        app.get('/api/categories', function(req, res){
              
-            var query = Category.find({}).select('name');
+            var query = Category.find({});
             /*Category.find({}, function(err, users) {
                 if (err) throw err;
                 console.log(users);
             });   */
             query.exec(function (err, someValue) {
         if (err) return next(err);
-        console.log(someValue);
+        res.json(someValue);
     });
+
+       /* Category.find({})
+                .populate({
+                    path:'subcats',
+                    model:'subcategory'})
+                .exec(function(err,result){
+                    console.log(result);
+                });*/
+
+
+ 
 
             
             

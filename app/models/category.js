@@ -9,6 +9,7 @@ var Schema = mongoose.Schema;
 var categorySchema = new Schema({
 	_id:Schema.Types.ObjectId,
 	//name:String,
+	//subcats: [{ type: Array, ref:'subcategory' }]
 	//subcatid:[Number],
 	//subcatname:[String],
 	

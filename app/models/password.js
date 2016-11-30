@@ -6,10 +6,12 @@ var Schema = mongoose.Schema;
 //create a schema
 
 
-var categorySchema = new Schema({
+var passwordSchema = new Schema({
 	_id:Schema.Types.ObjectId,
-	name:String,
+	userid:Schema.Types.ObjectId,
+	password:String
 	
+
 });
 
 
@@ -17,7 +19,7 @@ var categorySchema = new Schema({
 
 
 //create a model usiing the schema
-var Category = mongoose.model('category', categorySchema,'category');
+var Password = mongoose.model('password', passwordSchema,'password');
 
 //make this available to the users in the application
-module.exports = Category;
+module.exports = Password;

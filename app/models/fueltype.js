@@ -6,10 +6,11 @@ var Schema = mongoose.Schema;
 //create a schema
 
 
-var categorySchema = new Schema({
-	_id:Schema.Types.ObjectId,
-	name:String,
+var fueltypeSchema = new Schema({
+	_id:Number,
+	type:String
 	
+
 });
 
 
@@ -17,7 +18,7 @@ var categorySchema = new Schema({
 
 
 //create a model usiing the schema
-var Category = mongoose.model('category', categorySchema,'category');
+var FuelType = mongoose.model('fueltype', fueltypeSchema,'fueltype');
 
 //make this available to the users in the application
-module.exports = Category;
+module.exports = FuelType;

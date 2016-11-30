@@ -1,9 +1,16 @@
 //var Classified = require('./models/classified');
 var Category=require('./models/category');
-
 var Subcategory=require('./models/subcategory');
 var Classified = require('./models/classified');
-var Post = require('./models/post');
+var FuelType = require('./models/fueltype');
+var Condition = require('./models/condition');
+var Cylinder = require('./models/cylinder');
+var DriveType = require('./models/drivetype');
+var Password = require('./models/password');
+var Role = require('./models/role');
+var User = require('./models/user');
+
+
     
     module.exports = function(app) {
 
@@ -29,24 +36,9 @@ var Post = require('./models/post');
 
 
                 ]).exec(function(err,result){
-                    console.log(result);
+                    
                     res.json(result);
                });
-
-
-
-
-            //Version 1
-            /*var query = Category.find({});
-            /*Category.find({}, function(err, users) {
-                if (err) throw err;
-                console.log(users);
-            });   
-            query.exec(function (err, someValue) {
-        if (err) return next(err);
-        //res.json(someValue);
-        console.log(someValue);
-    });*/
 
             //Version 2
        /* Category.find({})
@@ -57,29 +49,20 @@ var Post = require('./models/post');
                     console.log(result);
                 );*/
 
-                //Version 3
-           /* Category.find({ }, function(error, story) {
-  if (error) {
-    return handleError(error);
-  }
-  
-  console.log(story); // prints "Aaron"
-});*/
-
-        });
+           });
 
 
 
         //To save a new post
         app.get('/api/classified/save', function(req, res){
 
-            var newpost=new Post({
-                
-                userid:1,
-                catid:1,
-                subcatid:1,
-                pdate:'11/23/2016',
-                udate:'11/23/2016',
+            var newpost=new Classified({
+                _id:null,
+                userid:"582dd2973153725a276269c4",
+                catid:"582dd2973153725a276269c4",
+                subcatid:"582dd2973153725a276269c4",
+                pdate:'11/29/2016',
+                udate:'11/29/2016',
                 shortdesc:'New post',
                 desc:'New post description',
                 price:'23',
@@ -114,7 +97,7 @@ var Post = require('./models/post');
 
            newpost.save(function (err, newpost) {
                 if (err) return console.error(err);
-                console.log("Post added");
+                
             });
 
 
@@ -122,12 +105,102 @@ var Post = require('./models/post');
         });
 
 
+        //To display an existing post
+        app.get('/api/classified/show', function(req, res){
+                     
+
+var cats=Classified.aggregate([
+            {
+                $lookup:
+                {
+                    from: "subcategory",
+                    localField: "_id",
+                    foreignField: "subcatid",
+                    as: "subcategories"
+                }
+            }
 
 
+                ]).exec(function(err,result){
+
+                    });
+                    
+                    cats.find({Desc:"Post for housing/apts"}
+                        ,function(err,ress){
+                if(err) throw err;
+                res.json(ress);
+                   
+
+            });
+               
+
+
+                     });
 
         app.get('/api/classified/new', function(req, res){
             res.json(new Classified());
         });
+
+
+        //To get the fuel types
+        app.get('/api/classified/fueltype', function(req, res){
+            FuelType.find({},function(err,fueltypes){
+                if (err) throw err;
+                res.json(fueltypes);
+            });
+        });
+
+        //To get the item conditions
+        app.get('/api/classified/condition', function(req, res){
+            Condition.find({},function(err,conditions){
+                if (err) throw err;
+                res.json(conditions);
+            });
+        });
+
+
+        //To get the cylinders
+        app.get('/api/classified/cylinder', function(req, res){
+            Cylinder.find({},function(err,cylinders){
+                if (err) throw err;
+                res.json(cylinders);
+            });
+        });
+
+        //To get the drive types
+        app.get('/api/classified/drivetype', function(req, res){
+            DriveType.find({},function(err,drivetypes){
+                if (err) throw err;
+                res.json(drivetypes);
+            });
+        });
+
+        //To get the posts(modify later)
+        app.get('/api/classified/', function(req, res){
+            Classified.find({},function(err,posts){
+                if (err) throw err;
+                res.json(posts);
+            });
+        });
+
+
+        //To get the password
+        app.get('/api/classified/login', function(req, res){
+            Password.find({userid:"5835074d2e415690e60becc1"},function(err,password){
+                if (err) throw err;
+                res.json(password);
+            });
+        });
+
+        //To get the user
+        app.get('/api/classified/user', function(req, res){
+            User.find({_id:"5835074d2e415690e60becc1"},function(err,user){
+                if (err) throw err;
+                res.json(user);
+            });
+        });
+
+
 
         app.get('/api/classified/:id', function(req, res){
            

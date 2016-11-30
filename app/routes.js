@@ -23,10 +23,11 @@ var User = require('./models/user');
         //To display the categories on home page
         app.get('/api/categories', function(req, res){
              
-            var cats=Category.aggregate([
+           var query=Category.aggregate([
             {
                 $lookup:
-                {
+                {   
+
                     from: "subcategory",
                     localField: "_id",
                     foreignField: "category_id",
@@ -35,20 +36,18 @@ var User = require('./models/user');
             }
 
 
-                ]).exec(function(err,result){
+                ]);
+
+
+
+
+           query.exec(function(err,result){
                     
                     res.json(result);
                });
 
-            //Version 2
-       /* Category.find({})
-                .populate({
-                    path:'subcats',
-                    model:'subcategory'})
-                .exec(function(err,result){
-                    console.log(result);
-                );*/
-
+          
+           
            });
 
 
@@ -109,29 +108,98 @@ var User = require('./models/user');
         app.get('/api/classified/show', function(req, res){
                      
 
-var cats=Classified.aggregate([
+        Classified.aggregate([
             {
                 $lookup:
                 {
-                    from: "subcategory",
-                    localField: "_id",
-                    foreignField: "subcatid",
-                    as: "subcategories"
+                    from: "users",
+                    localField: "userid",
+                    foreignField: "_id",
+                    as: "user",
+                    
+                    
                 }
+               
+            },
+            {
+                 $lookup:
+                {
+                    from: "category",
+                    localField: "catid",
+                    foreignField: "_id",
+                    as: "categ",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "subcategory",
+                    localField: "subcatid",
+                    foreignField: "_id",
+                    as: "subcateg",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "condition",
+                    localField: "conditionid",
+                    foreignField: "_id",
+                    as: "condition",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "fueltype",
+                    localField: "fueltype",
+                    foreignField: "_id",
+                    as: "fuel",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "drivetype",
+                    localField: "drivetype",
+                    foreignField: "_id",
+                    as: "drive",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "cylinders",
+                    localField: "cylinders",
+                    foreignField: "_id",
+                    as: "cylinder",
+                    
+                    
+                }
+
             }
 
 
                 ]).exec(function(err,result){
-
+                    res.json(result);
                     });
                     
-                    cats.find({Desc:"Post for housing/apts"}
-                        ,function(err,ress){
-                if(err) throw err;
-                res.json(ress);
-                   
-
-            });
+                    
                
 
 

@@ -11,7 +11,7 @@
 
         .when('/classified/new', {
             templateUrl: 'views/classified/create.html',
-            controller: 'ListingController'
+            controller: 'CreateClassifiedController'
         })
 
         
@@ -21,7 +21,7 @@
         })
 
         .when('/classifieds/', {
-            templateUrl: 'views/listing.html',
+            templateUrl: 'views/classified/listing.html',
             controller: 'ListingController'
         });
 

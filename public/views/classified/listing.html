@@ -1,0 +1,53 @@
+<!-- public/views/listing.html -->
+
+<div class="row">
+	<div class="col-md-12">
+		<h2 class="page-header">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{{homeUrl}}">Home</a></li>
+				<li class="breadcrumb-item"><a href="#">{{category}}</a></li>
+				<li class="breadcrumb-item active">{{subcategory}}</li>
+			</ol>
+		</h2>
+		<div class="page-header listing-filter">
+				
+			<h3><a href="#" class="fa fa-angle-down">Filters</a></h3>
+			
+			<div class="listing-filter-items hidden">
+				
+				<div class="btn-group col-md-3" role="group" aria-label="Basic example">
+		  			<button type="button" class="btn btn-primary">all</button>
+		  			<button type="button" class="btn btn-secondary">dealers</button>
+		  			<button type="button" class="btn btn-secondary">owner</button>
+				</div>
+
+				<div class="input-group col-md-3">
+					<span class="input-group-addon">
+						<input type="checkbox" aria-label="Checkbox for following text input"> search title only
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" aria-label="Checkbox for following text input"> has image
+					</span>
+					<span class="input-group-addon">
+						<input type="checkbox" aria-label="Checkbox for following text input"> posted today
+					</span>
+				</div>
+			
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div ng-repeat="listItem in data" class="col-md-4 listing-item">
+		<a href="#">
+			<img class="img-responsive" src="{{listItem.image}}" alt="">
+		</a>
+		<h3>
+			<small>{{listItem.pDate}}</small>
+			<a href="#">{{listItem.shortDesc}}</a>
+			<small>${{listItem.price}}</small>
+		</h3>
+	</div>
+</div>

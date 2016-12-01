@@ -9,8 +9,14 @@
             controller: 'MainController'
         })
 
+        .when('/classified/new', {
+            templateUrl: 'views/classified/create.html',
+            controller: 'ListingController'
+        })
+
+        
         .when('/classified/:id', {
-            templateUrl: 'views/classified.html',
+            templateUrl: 'views/classified/show.html',
             controller: 'ClassifiedController'
         })
 

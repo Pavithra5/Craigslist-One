@@ -8,7 +8,8 @@ var subcategorySchema = new Schema({
 	_id:Schema.Types.ObjectId,
 	user_id:Schema.Types.ObjectId,
 	
-	name:String
+	name:String,
+	isactive:Number
 	
 
 });

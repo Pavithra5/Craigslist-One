@@ -1,4 +1,5 @@
-//var Classified = require('./models/classified');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var Category=require('./models/category');
 var Subcategory=require('./models/subcategory');
 var Classified = require('./models/classified');
@@ -109,6 +110,16 @@ var User = require('./models/user');
                      
 
         Classified.aggregate([
+            
+            { 
+                $match:
+                { 
+                    subatid:new mongoose.Types.ObjectId("5835074d2e415690e60becc1"),
+                    catid:new mongoose.Types.ObjectId("582dd2973153725a276269c4")
+
+                }   
+
+            },
             {
                 $lookup:
                 {
@@ -193,6 +204,7 @@ var User = require('./models/user');
                 }
 
             }
+            
 
 
                 ]).exec(function(err,result){

@@ -9,6 +9,7 @@ var Schema = mongoose.Schema;
 var categorySchema = new Schema({
 	_id:Schema.Types.ObjectId,
 	name:String,
+	isactive:Number
 	
 });
 

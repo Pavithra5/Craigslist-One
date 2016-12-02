@@ -57,47 +57,55 @@ var User = require('./models/user');
         app.get('/api/classified/save', function(req, res){
 
             var newpost=new Classified({
-                _id:null,
-                userid:"582dd2973153725a276269c4",
-                catid:"582dd2973153725a276269c4",
-                subcatid:"582dd2973153725a276269c4",
-                pdate:'11/29/2016',
-                udate:'11/29/2016',
-                shortdesc:'New post',
-                desc:'New post description',
-                price:'23',
-                location:'Dallas',
-                area:'',
-                bed:0,
-                bath:0,
-                amenities:'Amenities',
-                image:'',
-                dimensions:'Dimensions',
-                conditionid:0,
-                make:'make',
-                model:'model',
-                year:1992,
-                transmission:0,
-                fueltype:0,
-                odometer:0,
-                dateavailable:'11/23/2016',
-                furnished:0,
-                isactive:0,
-                housetype:'house type',
-                laundry:0,
-                parking:0,
-                cylinders:0,
-                drivetype:0,
-                paintcolor:0,
-                vehiclesize:0,
-                titlestatus:0,
-                vehicletype:0,
-                employmenttype:0
+                    
+                    _id : null,
+                    userid : "5835074d2e415690e60becc1",
+                    catid : "582dd2dc3153725a276269c5",
+                    subcatid : "583e1b582f99e03593d8cb0e",
+                    pdate : "12/1/2016",
+                    udate : "12/1/2016",
+                    shortdesc : "For Sale/Antiques",
+                    desc : "For Sale/Antiques",
+                    price : 1200,
+                    location : "Dallas",
+                    area : 0,
+                    bed : 0,
+                    bath : 0,
+                    amenities : "",
+                    image : "",
+                    dlength : 12,
+                    dwidth : 34,
+                    dheight : 45,
+                    conditionid : "5840fbedba57cccf17f3fa4a",
+                    make : "",
+                    model : "",
+                    year : 1556,
+                    transmissionid : null,
+                    fueltype : null,
+                    odometer: 0,
+                    dateavailable : "12/1/2016",
+                    furnished : 0,
+                    isactive : 1,
+                    housetype : null,
+                    laundry : 0,
+                    parking : 0,
+                    cylinders : null,
+                    drivetype : null,
+                    paintcolor : null,
+                    titlestatus : null,
+                    vehicletype : null,
+                    employmenttype : null,
+                    dealer : 0,
+                    privateroom : 0,
+                    privatebath : 0,
+                    sizeid : null,
+                    propulsionid : null
+                
             });     
 
            newpost.save(function (err, newpost) {
                 if (err) return console.error(err);
-                
+                console.log("Saved")
             });
 
 
@@ -108,7 +116,6 @@ var User = require('./models/user');
         //To display an existing post
         app.get('/api/classified/show', function(req, res){
         
-
         Classified.aggregate([
             
             { 
@@ -171,10 +178,46 @@ var User = require('./models/user');
             {
                  $lookup:
                 {
+                    from: "transmission",
+                    localField: "transmissionid",
+                    foreignField: "_id",
+                    as: "transmission",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
                     from: "fueltype",
                     localField: "fueltype",
                     foreignField: "_id",
                     as: "fuel",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "housingtype",
+                    localField: "housetype",
+                    foreignField: "_id",
+                    as: "housetype",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "cylinders",
+                    localField: "cylinders",
+                    foreignField: "_id",
+                    as: "cylinders",
                     
                     
                 }
@@ -195,10 +238,70 @@ var User = require('./models/user');
             {
                  $lookup:
                 {
-                    from: "cylinders",
-                    localField: "cylinders",
+                    from: "colors",
+                    localField: "paintcolor",
                     foreignField: "_id",
-                    as: "cylinder",
+                    as: "paint",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "titlestatus",
+                    localField: "titlestatus",
+                    foreignField: "_id",
+                    as: "titlestatus",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "vehicletype",
+                    localField: "vehicletype",
+                    foreignField: "_id",
+                    as: "vehicletype",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "employmenttype",
+                    localField: "employmenttype",
+                    foreignField: "_id",
+                    as: "employmenttype",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "size",
+                    localField: "sizeid",
+                    foreignField: "_id",
+                    as: "vehiclesize",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "propulsion",
+                    localField: "propulsionid",
+                    foreignField: "_id",
+                    as: "propulsion",
                     
                     
                 }

@@ -8,8 +8,9 @@ var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
 	
-	userid:Number,
-	catid:Number,
+	_id:Schema.Types.ObjectId,
+	userid:Schema.Types.ObjectId,
+	catid:Schema.Types.ObjectId,
 	subcatid:Number,
 	pdate:String,
 	udate:String,
@@ -42,7 +43,13 @@ var postSchema = new Schema({
 	vehiclesize:Number,
 	titlestatus:Number,
 	vehicletype:Number,
-	employmenttype:Number
+	employmenttype:Number,
+	dealer:Number,
+	privateroom:Number,
+	privatebath:Number,
+	colorid:Schema.Types.ObjectId,
+	sizeid:Schema.Types.ObjectId,
+	propulsionid:Schema.Types.ObjectId
 });
 
 

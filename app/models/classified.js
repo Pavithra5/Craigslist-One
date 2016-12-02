@@ -15,34 +15,40 @@ var classifiedSchema = new Schema({
 	udate:String,
 	shortdesc:String,
 	desc:String,
-	price:String,
+	price:Number,
 	location:String,
-	area:String,
+	area:Number,
 	bed:Number,
 	bath:Number,
 	amenities:String,
 	image:String,
-	dimensions:String,
-	conditionid:Number,
+	dlength:Number,
+	dwidth:Number,
+	dheight:Number,
+	conditionid:Schema.Types.ObjectId,
 	make:String,
 	model:String,
 	year:Number,
-	transmission:Number,
-	fueltype:Number,
+	transmissionid:Schema.Types.ObjectId,
+	fueltype:Schema.Types.ObjectId,
 	odometer:Number,
 	dateavailable:String,
 	furnished:Number,
 	isactive:Number,
-	housetype:String,
+	housetype:Schema.Types.ObjectId,
 	laundry:Number,
 	parking:Number,
-	cylinders:Number,
-	drivetype:Number,
-	paintcolor:Number,
-	vehiclesize:Number,
-	titlestatus:Number,
-	vehicletype:Number,
-	employmenttype:Number
+	cylinders:Schema.Types.ObjectId,
+	drivetype:Schema.Types.ObjectId,
+	paintcolor:Schema.Types.ObjectId,
+	titlestatus:Schema.Types.ObjectId,
+	vehicletype:Schema.Types.ObjectId,
+	employmenttype:Schema.Types.ObjectId,
+	dealer:Number,
+	privateroom:Number,
+	privatebath:Number,
+	sizeid:Schema.Types.ObjectId,
+	propulsionid:Schema.Types.ObjectId
 });
 
 
@@ -50,7 +56,7 @@ var classifiedSchema = new Schema({
 
 
 //create a model usiing the schema
-var Classified = mongoose.model('posts', classifiedSchema,'posts');
+var Classified = mongoose.model('classified', classifiedSchema,'classified');
 
 //make this available to the users in the application
 module.exports = Classified;

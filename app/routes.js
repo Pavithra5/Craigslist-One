@@ -107,15 +107,15 @@ var User = require('./models/user');
 
         //To display an existing post
         app.get('/api/classified/show', function(req, res){
-                     
+        
 
         Classified.aggregate([
             
             { 
                 $match:
                 { 
-                    subatid:new mongoose.Types.ObjectId("5835074d2e415690e60becc1"),
-                    catid:new mongoose.Types.ObjectId("582dd2973153725a276269c4")
+                    catid:new mongoose.Types.ObjectId(req.query.category_id),
+                    subcatid:new mongoose.Types.ObjectId(req.query.subcategory_id)
 
                 }   
 

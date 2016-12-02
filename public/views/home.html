@@ -1,7 +1,7 @@
 <!-- public/views/home.html -->
 <div class="row page-header">
 	<div class="col-md-2">
-		<button class="btn btn-lg btn-primary">Post a Classified</button>
+		<button ng-click="postAClassified()" class="btn btn-lg btn-primary">Post a Classified</button>
 	</div>
 	<div class="col-md-5 home-date">
         <h2>{{date | date:'EEEE'}}</h2>
@@ -22,11 +22,11 @@
 		<div class="col-md-8">
 			<div class="panel panel-default"> 
 				<h2 class="panel-heading">
-					<a href="#">{{category.name}}</a>
+					<a href="/classifieds?cid={{category._id}}">{{category.name}}</a>
 				</h2>
 				<div class="panel-body">
 					<div ng-repeat='subcategory in category.subcategories'>
-						<a href="#">{{subcategory.name}}</a>
+						<a href="/classifieds?cid={{category._id}}&sid={{subcategory._id}}">{{subcategory.name}}</a>
 					</div>
 				</div>
 			</div>

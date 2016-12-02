@@ -3,10 +3,12 @@ angular.module('ListingCtrl', []).controller('ListingController', function($scop
 	$scope.homeUrl = window.location.origin;
 	$scope.category = "category";
 	$scope.subcategory = "subcategory";
+	console.log($routeParams);
 
-	$http.get('/api/classifieds',{
+	$http.get('/api/classified/show',{
 	    params: {
-	    	filters: "Listing"
+	    	category_id:$routeParams.cid,
+	    	subcategory_id: $routeParams.sid
 	    }
 	 }).success(function(data) {
             $scope.data = data;

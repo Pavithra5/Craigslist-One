@@ -1,5 +1,5 @@
 // public/js/controllers/MainCtrl.js
-angular.module('MainCtrl', []).controller('MainController', function($scope, $http) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $http, $location) {
 
 	$http.get('/api/categories/')
 	.success(function(data){
@@ -14,7 +14,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
 
 	$scope.date = new Date();
 
-
+	$scope.postAClassified = function() {
+		console.log($location.url('/classified/new'));
+	}
 
 
 });

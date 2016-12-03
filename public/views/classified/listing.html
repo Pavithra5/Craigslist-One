@@ -11,9 +11,9 @@
 		</h2>
 		<div class="page-header listing-filter">
 				
-			<h3><a href="#" class="fa fa-angle-down">Filters</a></h3>
+			<h3><a href="#" class="fa fa-angle-up">Filters</a></h3>
 			
-			<div class="listing-filter-items hidden">
+			<div class="listing-filter-items">
 				
 				<div class="btn-group col-md-3" role="group" aria-label="Basic example">
 		  			<button type="button" class="btn btn-primary">all</button>
@@ -45,8 +45,8 @@
 			<img class="img-responsive" src="{{listItem.image}}" alt="">
 		</a>
 		<h3>
-			<small>{{listItem.pDate}}</small>
-			<a href="#">{{listItem.shortDesc}}</a>
+			<small>{{listItem.pdate}}</small>
+			<a href="/classified/{{listItem._id}}">{{listItem.shortdesc}}</a>
 			<small>${{listItem.price}}</small>
 		</h3>
 	</div>

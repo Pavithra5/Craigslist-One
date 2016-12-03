@@ -574,51 +574,37 @@ var Vehicletype=require('./models/vehicletype');
         });
 
     //To match username and password
-        app.get('/api/classified/check', function(req, res){
+        app.get('/api/check', function(req, res){
 
-            function getPass(userid,pass){
-                var promise = Password.find({userid:userid,password:pass}).exec();
-                
-                return promise;
+            function getUser(emailID) {
+                return User.find({email: emailID}).exec();
             }
-            var promise = getPass("5835074d2e415690e60becc1","q");
-            
-            promise.then(function(jedis){
-                if (Object.getOwnPropertyNames(jedis).length <1)
-                console.log("empty");
-            jedis.forEach(function(jedi){
-                if (Object.getOwnPropertyNames(jedi).length != 0)
-                    {
-                        
 
+            function getPass(userid,pass) {
+                return Password.find({"userid":userid}).exec();
+            }
 
-                        User.find({_id:"5835074d2e415690e60becc1"},function(err,result){
-                            
-                            res.json(result);
-
-                        })
-                    }
-
-                else
-                    {
-                        res.json(User({
-                                _id:null,
-                                name:"",
-                                phone:"",
-                                email:"",
-                                address:"",
-                                city:"",
-                                state_id:"",
-                                zip:"",
-                                contacttime:"",
-                                roleid:"",
-                                isactive:""
-                            }));
-                    }
-                
+            var userPromise = getUser("kai5.pavi@gmail.com");
+            userPromise.then(function(user){
+                var result = {
+                        err:"user not found"
+                    };
+                if(user.length > 0) {
+                    console.log(user);
+                    var passPromise = Password.find({userid: "5835074d2e415690e60becc1"}).exec();
+                    passPromise.then(function(pass){
+                        console.log(pass);
+                        if(pass.length > 0) {
+                            res.json(user);
+                        }
+                        else {
+                            res.json({err: "pass not found"});
+                        }
+                    });
+                } else {
+                    res.json(result);
+                }
             });
-            });
-                        
         });
         
 

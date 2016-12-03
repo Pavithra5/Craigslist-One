@@ -15,8 +15,11 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
 	$scope.date = new Date();
 
 	$scope.postAClassified = function() {
-		console.log($location.url('/classified/new'));
+		$location.url('/classified/new');
 	}
 
+	$scope.myAccount = function() {
+		$location.url('/login')
+	}
 
 });

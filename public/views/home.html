@@ -1,7 +1,7 @@
 <!-- public/views/home.html -->
 <div class="row page-header">
 	<div class="col-md-2">
-		<button ng-click="postAClassified()" class="btn btn-lg btn-primary">Post a Classified</button>
+		<button ng-click="postAClassified()" class="btn btn-lg btn-craigslist">Post a Classified</button>
 	</div>
 	<div class="col-md-5 home-date">
         <h2>{{date | date:'EEEE'}}</h2>
@@ -11,23 +11,20 @@
 		<div class="input-group input-group-lg">
       <input type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
+        <button class="btn btn-craigslist" type="button">Go!</button>
       </span>
     </div>
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-6" ng-repeat="category in categories | orderBy: 'length'">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<div class="panel panel-default"> 
-				<h2 class="panel-heading">
-					<a href="/classifieds?cid={{category._id}}">{{category.name}}</a>
-				</h2>
-				<div class="panel-body">
-					<div ng-repeat='subcategory in category.subcategories'>
-						<a href="/classifieds?cid={{category._id}}&sid={{subcategory._id}}">{{subcategory.name}}</a>
-					</div>
+	<div class="col-md-3" ng-repeat="category in categories | orderBy: 'name'">		
+		<div class="panel panel-default"> 
+			<h2 class="panel-heading">
+				<a href="/classifieds?cid={{category._id}}">{{category.name}}</a>
+			</h2>
+			<div class="panel-body">
+				<div ng-repeat='subcategory in category.subcategories'>
+					<a href="/classifieds?cid={{category._id}}&sid={{subcategory._id}}">{{subcategory.name}}</a>
 				</div>
 			</div>
 		</div>

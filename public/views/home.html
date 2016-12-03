@@ -1,17 +1,16 @@
 <!-- public/views/home.html -->
-<div class="row page-header">
+<div class="row page-header home-header">
 	<div class="col-md-2">
-		<button ng-click="postAClassified()" class="btn btn-lg btn-craigslist">Post a Classified</button>
+		<button ng-click="postAClassified()" class="btn btn-lg btn-default">Post a Classified</button>
 	</div>
 	<div class="col-md-5 home-date">
-        <h2>{{date | date:'EEEE'}}</h2>
-        <h2>{{date | date:'MMM d, y'}}</h2>
+        <p>{{date | date:'EEEE, MMM d, y'}}</p>
 	</div>
 	<div class="col-md-5">
 		<div class="input-group input-group-lg">
       <input type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
-        <button class="btn btn-craigslist" type="button">Go!</button>
+        <button class="btn btn-default" type="button">Go!</button>
       </span>
     </div>
 	</div>

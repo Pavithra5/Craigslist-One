@@ -41,9 +41,10 @@ var Vehicletype=require('./models/vehicletype');
             },
             "582dd2dc3153725a276269c5":{            
                 price:true,
-                make:true,
-                model:true,
-                size:true,
+                dlength:true,
+                dwidth:true,
+                dheight:true,
+                manufacturer:true,
                 condition:true
             },
             "582dd2973153725a276269c4":{
@@ -78,13 +79,89 @@ var Vehicletype=require('./models/vehicletype');
                 laundry:false,
                 parking:false
 
+            },
+            "583e1bec2f99e03593d8cb3d":{
+                privateroom:true,
+                privatebath:true,
+                bed:false,
+                bath:false,
+                housetype:false
+            },
+            "583e1bec2f99e03593d8cb3e":{
+                privateroom:true,
+                privatebath:true,
+                bed:false,
+                bath:false,
+                housetype:false
+            },
+            "583e1b582f99e03593d8cb32":{
+                year:true,
+                colors:true
+            },
+            "583e1b582f99e03593d8cb17":{
+                propulsion:true,
+                
+            },
+            "583e1b582f99e03593d8cb1a":{
+                cylinder:true,
+                drivetype:true,
+                fueltype:true,
+                colors:true,
+                size:true,
+                titlestatus:true,
+                transmission:true,
+                vehicletype:true,
+                odometer:true,
+                manufacturer:false,
+                make:true,
+                model:true,
+                dlength:false,
+                dwidth:false,
+                dheight:false
+
+            },
+            "583e1b582f99e03593d8cb2a":{
+                dlength:false,
+                dwidth:false,
+                dheight:false,
+                make:true,
+                manufacturer:false,
+                model:true,
+                fueltype:true,
+                colors:true,
+                titlestatus:true,
+                transmission:true,
+                odometer:true
+            },
+            "583e1b582f99e03593d8cb2d":{
+                cylinder:true,
+                drivetype:true,
+                fueltype:true,
+                colors:true,
+                titlestatus:true,
+                transmission:true,
+                vehicletype:true,
+                odometer:true,
+                manufacturer:false,
+                make:true,
+                model:true,
+                dlength:false,
+                dwidth:false,
+                dheight:false
             }
 
 
         };
 
+
+        //To get the fields for categories
          app.get('/api/categoryFields', function(req, res){
             res.json(categoryFields);
+         });
+
+         //To get the fields for subcategories
+         app.get('/api/subcategoryFields', function(req, res){
+            res.json(subcategoryFields);
          });
 
 

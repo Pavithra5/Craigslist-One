@@ -573,6 +573,54 @@ var Vehicletype=require('./models/vehicletype');
             });
         });
 
+    //To match username and password
+        app.get('/api/classified/check', function(req, res){
+
+            function getPass(userid,pass){
+                var promise = Password.find({userid:userid,password:pass}).exec();
+                
+                return promise;
+            }
+            var promise = getPass("5835074d2e415690e60becc1","q");
+            
+            promise.then(function(jedis){
+                if (Object.getOwnPropertyNames(jedis).length <1)
+                console.log("empty");
+            jedis.forEach(function(jedi){
+                if (Object.getOwnPropertyNames(jedi).length != 0)
+                    {
+                        
+
+
+                        User.find({_id:"5835074d2e415690e60becc1"},function(err,result){
+                            
+                            res.json(result);
+
+                        })
+                    }
+
+                else
+                    {
+                        res.json(User({
+                                _id:null,
+                                name:"",
+                                phone:"",
+                                email:"",
+                                address:"",
+                                city:"",
+                                state_id:"",
+                                zip:"",
+                                contacttime:"",
+                                roleid:"",
+                                isactive:""
+                            }));
+                    }
+                
+            });
+            });
+                        
+        });
+        
 
 
         app.get('/api/classified/:id', function(req, res){
@@ -628,6 +676,8 @@ var Vehicletype=require('./models/vehicletype');
             
             res.json(testList);
         });
+
+    
 
 
         // frontend routes =========================================================

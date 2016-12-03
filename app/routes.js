@@ -30,6 +30,26 @@ var Vehicletype=require('./models/vehicletype');
         // authentication routes
 
 
+        var categoryFields={
+
+            "582dd2dc3153725a276269c7":{
+                compensation:true,
+                employmenttype:true
+            }
+
+        };
+
+         app.get('/api/categoryFields', function(req, res){
+            res.json(categoryFields);
+         });
+
+
+
+        //Get user function
+            function getUser(emailID) {
+                return User.find({email: emailID}).exec();
+            }
+
 
         //To display the categories on home page
         app.get('/api/categories', function(req, res){
@@ -573,32 +593,89 @@ var Vehicletype=require('./models/vehicletype');
             });
         });
 
+
+    //To save user details
+        app.get('/api/user/create',function(req,res){
+                var newuser=new User({
+                    
+                    _id : null,
+                    name:"New user",
+                    phone:"9894044059",
+                    email:"email@email.com",
+                    address:"Address",
+                    city:"Dallas",
+                    state_id:20,
+                    zip:75252,
+                    contacttime:"Morning",
+                    roleid:2,
+                    isactive:1
+                    
+                
+            });     
+
+           newuser.save(function (err, newuser) {
+                if (err) return console.error(err);
+                console.log("User Saved")
+            });
+
+
+
+           var userPromise = getUser("email@email.com");
+            userPromise.then(function(user){
+                var result = {
+                        err:"user not found"
+                    };
+
+var newpassword=new Password({
+                    _id:null,
+                    userid:user[0]._id,
+                    password:"password"
+            }); 
+
+            newpassword.save(function (err, newuser) {
+                if (err) return console.error(err);
+                console.log("Password Saved")
+            });
+
+
+
+            });
+
+
+
+                
+
+        });
+
+           
+        
+
     //To match username and password
         app.get('/api/check', function(req, res){
 
-            function getUser(emailID) {
-                return User.find({email: emailID}).exec();
-            }
+            
 
             function getPass(userid,pass) {
                 return Password.find({"userid":userid}).exec();
             }
 
-            var userPromise = getUser("kai5.pavi@gmail.com");
+            var userPromise = getUser(req.params.email);
             userPromise.then(function(user){
                 var result = {
                         err:"user not found"
                     };
                 if(user.length > 0) {
                     console.log(user);
-                    var passPromise = Password.find({userid: "5835074d2e415690e60becc1"}).exec();
+                    var passPromise = Password.find({userid: user[0]._id,password:req.params.password}).exec();
                     passPromise.then(function(pass){
                         console.log(pass);
                         if(pass.length > 0) {
                             res.json(user);
                         }
                         else {
+
                             res.json({err: "pass not found"});
+
                         }
                     });
                 } else {

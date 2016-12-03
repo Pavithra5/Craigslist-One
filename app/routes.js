@@ -35,7 +35,51 @@ var Vehicletype=require('./models/vehicletype');
             "582dd2dc3153725a276269c7":{
                 compensation:true,
                 employmenttype:true
+            },
+            "582dd2dc3153725a276269c6":{
+
+            },
+            "582dd2dc3153725a276269c5":{            
+                price:true,
+                make:true,
+                model:true,
+                size:true,
+                condition:true
+            },
+            "582dd2973153725a276269c4":{
+                area:true,
+                price:true,
+                dateavailable:true,
+                bed:true,
+                bath:true,
+                housetype:true,
+                laundry:true,
+                parking:true,
+                furnished:true
             }
+
+        };
+
+        var subcategoryFields={
+            "583e1bec2f99e03593d8cb38":{
+                bed:false,
+                bath:false,
+                furnished:false,
+                housetype:false,
+                laundry:false,
+                parking:false
+
+            },
+            "583e1bec2f99e03593d8cb39":{
+                bed:false,
+                bath:false,
+                furnished:false,
+                housetype:false,
+                laundry:false,
+                parking:false
+
+            }
+
 
         };
 
@@ -460,7 +504,7 @@ var Vehicletype=require('./models/vehicletype');
         });
 
     //To get the employment types
-        app.get('/api/classified/employment', function(req, res){
+        app.get('/api/classified/employmenttype', function(req, res){
             Employment.find({},function(err,employmenttype){
                 if (err) throw err;
                 res.json(employmenttype);

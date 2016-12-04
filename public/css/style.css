@@ -45,3 +45,7 @@ div.home-header {
 	padding:20px;
 	color:#f3f3f3;
 }
+
+.error {
+	color: red;
+}

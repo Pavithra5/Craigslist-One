@@ -948,7 +948,7 @@ var Vehicletype=require('./models/vehicletype');
                         err:"user not found"
                     };
 
-var newpassword=new Password({
+            var newpassword=new Password({
                     _id:null,
                     userid:user[0]._id,
                     password:"password"

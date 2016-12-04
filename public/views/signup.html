@@ -1,1 +1,68 @@
-{{name}}
+<div class="col-md-3"></div>
+<div class="col-md-6">
+	<form class="row form-signup">
+		
+		<h2 class="col-md-12 form-signin-heading">Sign Up</h2>
+		
+		<div class="col-md-12 form-group">
+			<label for="inputName">Name</label>
+			<input type="text" ng-model="formData.name" id="inputName" class="form-control" placeholder="Name" required autofocus>
+		</div>
+
+		<div class="col-md-12 form-group">
+			<label for="inputAddress">Address</label>
+			<input type="text" ng-model="formData.address" id="inputAddress" class="form-control" placeholder="Address">
+		</div>
+
+		<div class="col-md-12 form-group">
+			<label for="inputCity">City</label>
+			<input type="text" ng-model="formData.city" id="inputCity" class="form-control" placeholder="City">
+		</div>
+
+		<div class="col-md-12 form-group">
+			<label for="inputState">State</label>
+			<select ng-model="formData.state" id="inputState" class="form-control">
+				<option ng-repeat="stateName in states" value="{{stateName._id}}">{{stateName.name}}</option>
+			</select>
+		</div>
+
+		<div class="col-md-12 form-group">
+			<label for="inputZip">Zipcode <small>(Example: 75080)</small></label>
+			<input type="number" ng-model="formData.zip" id="inputZip" class="form-control">
+		</div>
+
+		<div class="col-md-12 form-group">
+			<label for="inputPhone">Phone Number<small>(Example: 2142054444)</small></label>
+			<input type="number" ng-model="formData.phone" id="inputPhone" class="form-control">
+		</div>
+
+		<div class="col-md-12 form-group">
+			<label for="inputEmail">Email address</label>
+			<input type="email" ng-model="formData.email" id="inputEmail" class="form-control" placeholder="Email address" required>
+		</div>
+		
+		<div class="col-md-12 form-group">
+			<label for="inputPassword">Password</label>
+			<input type="password" ng-model="password" id="inputPassword" class="form-control" placeholder="Password" required>
+		</div>
+
+		<div class="col-md-12 form-group">
+			<label for="inputConfirmPassword">Confirm Password</label>
+			<input type="password" ng-model="confirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
+		</div>
+		
+		<div class="col-md-12">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<button ng-click="submit()" class="btn btn-lg btn-craigslist btn-block">Sign Up</button>
+			</div>
+		</div>
+		
+		<div class="col-md-3"></div>
+		
+		<div class="col-md-6" style="text-align: center;">
+			<a href="/login">Already a User?</a>
+		</div>
+	</form>
+	
+</div>

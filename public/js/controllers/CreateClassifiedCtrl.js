@@ -2,6 +2,8 @@
 angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedController', function($scope, $http, $routeParams) {
 	$scope.subcategoryValue = "";
 
+	$('select#subcategoryDD').prop('disabled', true);
+
 	$scope.years = [
 		"2016",
 		"2015",
@@ -24,6 +26,23 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 		"1998",
 		"1997"
 	];
+
+	$http.get('/api/categoryFields')
+	.success(function(data){
+		$scope.categoryFields = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
+	$http.get('/api/subcategoryFields')
+	.success(function(data){
+		$scope.subcategoryFields = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
 
 	$http.get('/api/categories/')
 	.success(function(data){
@@ -49,6 +68,31 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
        console.log(data);
 	});
 
+	$http.get('/api/classified/titlestatus')
+	.success(function(data){
+		$scope.statuses = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
+
+	$http.get('/api/classified/size')
+	.success(function(data){
+		$scope.sizes = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
+	$http.get('/api/classified/transmission')
+	.success(function(data){
+		$scope.transmissions = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
 	$http.get('/api/classified/cylinder')
 	.success(function(data){
 		$scope.cylinders = data;
@@ -57,26 +101,68 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
        console.log(data);
 	});
 
-	$http.get('/api/classified/driveType')
+	$http.get('/api/classified/colors')
 	.success(function(data){
-		$scope.driveTypes = data;
+		$scope.colors = data;
 	})
 	.error(function(data){
        console.log(data);
 	});
 
+	$http.get('/api/classified/driveType')
+	.success(function(data){
+		$scope.drivetypes = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
+	$http.get('/api/classified/vehicletype')
+	.success(function(data){
+		$scope.vehicletypes = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
+	$http.get('/api/classified/employmenttype')
+	.success(function(data){
+		$scope.employmenttypes = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
+	$http.get('/api/classified/housetype')
+	.success(function(data){
+		$scope.housetypes = data;
+	})
+	.error(function(data){
+       console.log(data);
+	});
+
+
+
 	$scope.categoryChange = function() {
+		$scope.subcategoryValue = "";
+		$scope.currFields = {};
 		$scope.categoryId = $('input[name="category-radio"]:checked').val();
 		angular.forEach($scope.categories, function(value){
 			if(value._id == $scope.categoryId) {
 				$scope.subcategories = value.subcategories;
 			}
 		});
+		$('select#subcategoryDD').prop('disabled', false);
+
 	}
 
 
 
-	$scope.$watch('subcategoryValue', function(value){
-		
-	});
+	$scope.subcategoryChange = function() {
+		$('select#subcategoryDD').prop('disabled', true);
+		$scope.currFields = $scope.categoryFields[$scope.categoryId];
+		angular.forEach($scope.subcategoryFields[$scope.subcategoryValue], function(val, key) {
+			$scope.currFields[key] = val;
+		});
+	}
 });

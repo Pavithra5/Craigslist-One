@@ -911,14 +911,14 @@ var newpassword=new Password({
                 return Password.find({"userid":userid}).exec();
             }
 
-            var userPromise = getUser(req.params.email);
+            var userPromise = getUser(req.query.email);
             userPromise.then(function(user){
                 var result = {
                         err:"user not found"
                     };
                 if(user.length > 0) {
                     console.log(user);
-                    var passPromise = Password.find({userid: user[0]._id,password:req.params.password}).exec();
+                    var passPromise = Password.find({userid: user[0]._id,password:req.query.password}).exec();
                     passPromise.then(function(pass){
                         console.log(pass);
                         if(pass.length > 0) {

@@ -9,7 +9,8 @@ var Schema = mongoose.Schema;
 var favoritesSchema = new Schema({
 	_id:Schema.Types.ObjectId,
 	classified_id:Schema.Types.ObjectId,
-	user_id:Schema.Types.ObjectId	
+	user_id:Schema.Types.ObjectId,
+	isactive:Number	
 });
 
 

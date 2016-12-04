@@ -272,7 +272,7 @@ var Vehicletype=require('./models/vehicletype');
         });
 
 
-        //To display an existing post
+        //To display an existing classified
         app.get('/api/classified/show', function(req, res){
         
         var filter={};
@@ -395,18 +395,15 @@ var Vehicletype=require('./models/vehicletype');
                             
                       ];
         }
+        var skip=2;
+        var limit=2;
         Classified.aggregate([
             
             { 
                 $match:
                
                     filter
-                    
-                    
-                  
-                    
-                 
-
+          
             },
             {
                 $lookup:
@@ -587,7 +584,10 @@ var Vehicletype=require('./models/vehicletype');
                     
                 }
 
-            }
+            },
+            {$sort: {shortdesc: 1}},
+            {$skip:(req.query.page-1)*2},
+            {$limit: 2},
             
 
 
@@ -721,11 +721,81 @@ var Vehicletype=require('./models/vehicletype');
 
     //To get the favorites
         app.get('/api/classified/favorite', function(req, res){
-            Favorite.find({},function(err,favorites){
-                if (err) throw err;
-                res.json(favorites);
-            });
+            
+
+            var query=Favorite.aggregate([
+            {
+                $lookup:
+                {   
+
+                    from: "classified",
+                    localField: "userid",
+                    foreignField: "user_id",
+                    as: "user"
+                }
+
+            },
+            {
+                $lookup:
+                {
+                    from:"classified",
+                    localField:"_id",
+                    foreignField:"classified_id",
+                    as:"classified"
+                }
+            }
+
+
+                ]);
+
+
+
+
+           query.exec(function(err,result){
+                    
+                    res.json(result);
+               });
+
+
+
         });
+
+        //To create a favorite
+        app.get('/api/classified/favorite/create', function(req, res){
+            var newfav=new Favorite({
+                _id:null,
+                classified_id:"5842150902cab56c06668699",
+                user_id:"5835074d2e415690e60becc1",
+                isactive:1
+
+            })
+            newfav.save(function(err,result){
+                if(err)console.log(err);
+                console.log("Favorite added");
+            })
+
+
+        });
+
+        //To update a favorite
+        app.get('/api/classified/favorite/edit', function(req, res){
+
+            Favorite.findOneAndUpdate({_id:"5843c5a9ac21ea6021df12ec"},{user_id:"5835074d2e415690e60becc1",classified_id:"5842150902cab56c06668699"},function(err,result){
+                if(err)console.log(err)
+                    console.log("Updated favorite");
+            })
+        });
+
+        //To delete a favorite
+        app.get('/api/favorite/delete', function(req, res){
+
+            Favorite.findOneAndUpdate({_id:"5843c5a9ac21ea6021df12ec"},{isactive:0},function(err,result){
+                if(err)console.log(err)
+                    else
+                    console.log("Deleted favorite");
+            })
+        });
+
 
     //To get the fuel types
         app.get('/api/classified/fueltype', function(req, res){

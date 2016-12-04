@@ -153,7 +153,10 @@ var Vehicletype=require('./models/vehicletype');
 
         };
 
-
+        var year={
+            "year":[1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,
+                    2011,2012,2013,2014,2015,2016]
+        };
         //To get the fields for categories
          app.get('/api/categoryFields', function(req, res){
             res.json(categoryFields);
@@ -162,6 +165,11 @@ var Vehicletype=require('./models/vehicletype');
          //To get the fields for subcategories
          app.get('/api/subcategoryFields', function(req, res){
             res.json(subcategoryFields);
+         });
+
+         //To get the year dropdown
+         app.get('/api/year', function(req, res){
+            res.json(year);
          });
 
 
@@ -267,15 +275,137 @@ var Vehicletype=require('./models/vehicletype');
         //To display an existing post
         app.get('/api/classified/show', function(req, res){
         
+        var filter={};
+        if(req.query.classified_id){
+            filter._id= new mongoose.Types.ObjectId(req.query.classified_id);
+        }
+        if(req.query.user_id){
+            filter.userid= new mongoose.Types.ObjectId(req.query.user_id);
+        }
+        
+        if(req.query.category_id) {
+            filter.catid = new mongoose.Types.ObjectId(req.query.category_id);
+        } 
+        if(req.query.subcategory_id) {
+            filter.subcatid = new mongoose.Types.ObjectId(req.query.subcategory_id);
+        }
+        if(req.query.post_date) {
+            filter.pdate = req.query.post_date;
+        }
+        if(req.query.update_date) {
+            filter.udate = req.query.update_date;
+        }
+        if(req.query.employmenttype){
+            filter.employmenttype=new mongoose.Types.ObjectId(req.query.employmenttype);
+        }
+        
+        if(req.query.conditionid){
+            filter.conditionid=new mongoose.Types.ObjectId(req.query.conditionid);
+        }
+        if(req.query.dateavailable){
+            filter.dateavailable=req.query.dateavailable;
+        }
+        if(req.query.bed){
+            filter.bed=req.query.bed;
+        }
+        if(req.query.bath){
+            filter.bath=req.query.bath;
+        }
+        if(req.query.housetype){
+            filter.housetype=new mongoose.Types.ObjectId(req.query.housetype);
+        }
+        if(req.query.laundry){
+            filter.laundry=req.query.laundry;
+        }
+        if(req.query.parking){
+            filter.parking=req.query.parking;
+        }
+        if(req.query.furnished){
+            filter.furnished=req.query.furnished;
+        }
+        if(req.query.privateroom){
+            filter.privateroom=req.query.privateroom;
+        }
+        if(req.query.privatebath){
+            filter.privatebath=req.query.privatebath;
+        }
+        if(req.query.colors){
+            filter.paintcolor=new mongoose.Types.ObjectId(req.query.colors);
+        }
+        if(req.query.propulsion){
+            filter.propulsionid=new mongoose.Types.ObjectId(req.query.propulsion);
+        }
+        if(req.query.cylinder){
+            filter.cylinders=new mongoose.Types.ObjectId(req.query.cylinder);
+        }
+        if(req.query.drivetype){
+            filter.drivetype=new mongoose.Types.ObjectId(req.query.drivetype);
+        }
+        if(req.query.fueltype){
+            filter.fueltype=new mongoose.Types.ObjectId(req.query.fueltype);
+        }
+        if(req.query.size){
+            filter.sizeid=new mongoose.Types.ObjectId(req.query.size);
+        }
+        if(req.query.titlestatus){
+            filter.titlestatus=new mongoose.Types.ObjectId(req.query.titlestatus);
+        }
+        if(req.query.transmission){
+            filter.transmissionid=new mongoose.Types.ObjectId(req.query.transmission);
+        }
+        if(req.query.vehicletype){
+            filter.vehicletype=new mongoose.Types.ObjectId(req.query.vehicletype);
+        }
+        if(req.query.make){
+            filter.make=req.query.make;
+        }
+        if(req.query.model){
+            filter.make=req.query.model;
+        }
+        if(req.query.dealer){
+            filter.dealer=req.query.dealer;
+        }
+        if(req.query.area1){
+            filter.area= { $gt: req.query.area1, $lt: req.query.area2 }; 
+        }
+        if(req.query.price1){
+            filter.price= { $gt: req.query.price1, $lt: req.query.price2 };
+        }
+        if(req.query.width1){
+            filter.dwidth= { $gt: req.query.width1, $lt: req.query.width2 }; 
+        }
+        if(req.query.height1){
+            filter.dheight= { $gt: req.query.height1, $lt: req.query.height2 }; 
+        }
+        if(req.query.length1){
+            filter.dlength= { $gt: req.query.length1, $lt: req.query.length2 }; 
+        }
+        if(req.query.year1){
+            filter.year= { $gt: req.query.year1, $lt: req.query.year2 }; 
+        }
+        if(req.query.odometer1){
+            filter.odometer= { $gt: req.query.odometer1, $lt: req.query.odometer2 }; 
+        }
+       
+        if(req.query.search){
+            filter.$or= [
+                        {desc:/req.query.search/},
+                        {shortdesc:/req.query.search/ }
+
+                            
+                      ];
+        }
         Classified.aggregate([
             
             { 
                 $match:
-                { 
-                    catid:new mongoose.Types.ObjectId(req.query.category_id),
-                    subcatid:new mongoose.Types.ObjectId(req.query.subcategory_id)
-
-                }   
+               
+                    filter
+                    
+                    
+                  
+                    
+                 
 
             },
             {
@@ -820,6 +950,7 @@ var newpassword=new Password({
 
 
        // app.get('/showone', function(req, res){
+    //To get one single classified
         app.get('/api/classified/:id', function(req, res){
         
         Classified.aggregate([
@@ -1023,7 +1154,214 @@ var newpassword=new Password({
                      });
 
 
+        //To search for classifieds
+        app.get('/search', function(req, res){
 
+           
+            Classified.aggregate([
+            
+            { 
+                $match:
+                { 
+                    $or: [ 
+                    { shortdesc: /For Housing/ },
+                    { desc:/descri/ } 
+                    ]
+
+                }   
+
+            },
+            {
+                $lookup:
+                {
+                    from: "users",
+                    localField: "userid",
+                    foreignField: "_id",
+                    as: "user",
+                    
+                    
+                }
+               
+            },
+            {
+                 $lookup:
+                {
+                    from: "category",
+                    localField: "catid",
+                    foreignField: "_id",
+                    as: "categ",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "subcategory",
+                    localField: "subcatid",
+                    foreignField: "_id",
+                    as: "subcateg",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "condition",
+                    localField: "conditionid",
+                    foreignField: "_id",
+                    as: "condition",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "transmission",
+                    localField: "transmissionid",
+                    foreignField: "_id",
+                    as: "transmission",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "fueltype",
+                    localField: "fueltype",
+                    foreignField: "_id",
+                    as: "fuel",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "housingtype",
+                    localField: "housetype",
+                    foreignField: "_id",
+                    as: "housetype",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "cylinders",
+                    localField: "cylinders",
+                    foreignField: "_id",
+                    as: "cylinders",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "drivetype",
+                    localField: "drivetype",
+                    foreignField: "_id",
+                    as: "drive",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "colors",
+                    localField: "paintcolor",
+                    foreignField: "_id",
+                    as: "paint",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "titlestatus",
+                    localField: "titlestatus",
+                    foreignField: "_id",
+                    as: "titlestatus",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "vehicletype",
+                    localField: "vehicletype",
+                    foreignField: "_id",
+                    as: "vehicletype",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "employmenttype",
+                    localField: "employmenttype",
+                    foreignField: "_id",
+                    as: "employmenttype",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "size",
+                    localField: "sizeid",
+                    foreignField: "_id",
+                    as: "vehiclesize",
+                    
+                    
+                }
+
+            },
+            {
+                 $lookup:
+                {
+                    from: "propulsion",
+                    localField: "propulsionid",
+                    foreignField: "_id",
+                    as: "propulsion",
+                    
+                    
+                }
+
+            }
+            
+
+
+                ]).exec(function(err,result){
+                    
+                    res.json(result);
+                    });
+       
+        });
+
+        //To get all classifieds for a single user
         app.get('/showall', function(req, res){
         
         Classified.aggregate([

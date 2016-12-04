@@ -918,9 +918,11 @@ var Vehicletype=require('./models/vehicletype');
 
     //To save user details
         app.get('/api/user/create',function(req,res){
-                var newuser=new User({
+            
+            console.log(req.query.user)
+                var newuser=new User(
                     
-                    _id : null,
+                    /*_id : null,
                     name:"New user",
                     phone:"9894044059",
                     email:"email@email.com",
@@ -930,10 +932,10 @@ var Vehicletype=require('./models/vehicletype');
                     zip:75252,
                     contacttime:"Morning",
                     roleid:2,
-                    isactive:1
+                    isactive:1*/req.query.user
                     
                 
-            });     
+            );     
 
            newuser.save(function (err, newuser) {
                 if (err) return console.error(err);
@@ -942,17 +944,17 @@ var Vehicletype=require('./models/vehicletype');
 
 
 
-           var userPromise = getUser("email@email.com");
+           var userPromise = getUser(req.query.user.email);
             userPromise.then(function(user){
                 var result = {
                         err:"user not found"
                     };
 
-            var newpassword=new Password({
-                    _id:null,
+            var newpassword=new Password(req.query.password
+                    /*_id:null,
                     userid:user[0]._id,
-                    password:"password"
-            }); 
+                    password:"password"*/
+            ); 
 
             newpassword.save(function (err, newuser) {
                 if (err) return console.error(err);

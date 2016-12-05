@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 
 var drivetypeSchema = new Schema({
-	_id:Number,
+	_id:Schema.Types.ObjectId,
 	type:String
 	
 

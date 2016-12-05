@@ -1,47 +1,67 @@
 <!-- public/views/classified.html -->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">{{data.categ[0].name}}</li>
+                <li class="breadcrumb-item active">{{data.subcateg[0].name}}</li>
+            </ol>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" style="text-align: center;">
+        <h1>{{data.shortdesc}} ({{data.location}})</h1>
+        <h3 ng-show="currFields.price && data.price">Price: {{data.price | currency}}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" style="text-align: center;">
+        <img src='{{data.image}}'/>
+    </div>
+</div>
 
-<div class="jumbotron text-center">
-    <h1>{{data.shortdesc}}</h1>
-    <p>ID:{{data._id}}</p>
-    <p>Userid: {{data.userid}}</p>
-    <p>Category id: {{data.catid}}</p>
-    <p>Subcategory id: {{data.subcatid}}</p>
-    <p>Date posted: {{data.pdate}}</p>
-    <p>Date last updated: {{data.udate}}</p>
-    <p>Description:{{data.desc}}</p>
-    <p>Price:{{data.price}}</p>
-    <p>Location: {{data.location}}</p>
-    <p>Area: {{data.area}}</p>
-    <p>Bed: {{data.bed}}</p>
-    <p>Bath: {{data.bath}}</p>
-    <p>Amenities: {{data.amenities}}</p>
-    <img src='{{data.image}}'/>
-    <p>Length: {{data.dlength}}</p>
-    <p>Width: {{data.dwidth}}</p>
-    <p>Height: {{data.dheight}}</p>
-    <p>Condition: {{data.conditionid}}</p>
-    <p>Make: {{data.make}}</p>
-    <p>Model: {{data.model}}</p>
-    <p>Year: {{data.year}}</p>
-    <p>Transmission type: {{data.transmissionid}}</p>
-    <p>Fuel type: {{data.fueltype}}</p>
-    <p>Odometer reading: {{data.odometer}}</p>
-    <p>Available from: {{data.dateavailable}}</p>
-    <p>Furnished: {{data.furnished}}</p>  
-    <p>Active: {{data.isactive}}</p>
-    <p>Laundry: {{data.laundry}}</p>
-    <p>Parking: {{data.parking}}</p>
-    <p>Cylinders: {{data.cylinders}}</p>
-    <p>Drive type: {{data.drivetype}}</p>
-    <p>Paint color: {{data.paintcolor}}</p>
-    <p>Title status: {{data.titlestatus}}</p>
-    <p>Vehicle type: {{data.vehicletype}}</p>
-    <p>Employment type: {{data.employmenttype}}</p>
-    <p>Owner/Dealer: {{data.dealer}}</p>
-    <p>Private room: {{data.privateroom}}</p>
-    <p>Private bath: {{data.privatebath}}</p>
-    <p>Size: {{data.sizeid}}</p>
-    <p>Propulsion: {{data.propulsionid}}</p>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7 cd-left">
 
+        <p class="cd-desc">
+        <label>Description:</label> {{data.desc}}</p>
+        <p>Post Id:{{data._id}}</p>
+        <p>Posted by: {{data.user[0].name}}</p>
+        <p>Date posted: {{data.pdate}}</p>
+        <p>Date last updated: {{data.udate}}</p>
 
+    </div>
+     <div class="col-md-3 cd-right" style="text-align: center;">
+        <!-- <p>Location: {{data.location}}</p> -->
+        <p ng-show="currFields.area && data.area">Area: {{data.area}}</p>
+        <p ng-show="currFields.bed && data.bed">Bed: {{data.bed}}</p>
+        <p ng-show="currFields.bath && data.bath">Bath: {{data.bath}}</p>
+        <p ng-show="currFields.amenities && data.amenities">Amenities: {{data.amenities}}</p>    
+        <p ng-show="currFields.dlength && data.dlength">Length: {{data.dlength}} cm</p>
+        <p ng-show="currFields.dwidth && data.dwidth">Width: {{data.dwidth}} cm</p>
+        <p ng-show="currFields.dheight && data.dheight">Height: {{data.dheight}} cm</p>
+        <p ng-show="currFields.condition && data.conditionid">Condition: {{data.condition[0].condition}}</p>
+        <p ng-show="currFields.make && data.make">Make: {{data.make}}</p>
+        <p ng-show="currFields.manufacturer && data.make">Manufacturer: {{data.make}}</p>
+        <p ng-show="currFields.model && data.model">Model: {{data.model}}</p>
+        <p ng-show="currFields.year && data.year">Year: {{data.year}}</p>
+        <p ng-show="currFields.transmission && data.transmissionid">Transmission type: {{data.transmissionid}}</p>
+        <p ng-show="currFields.fueltype && data.fueltype">Fuel type: {{data.fueltype}}</p>
+        <p ng-show="currFields.odometer && data.odometer">Odometer reading: {{data.odometer}}</p>
+        <p ng-show="currFields.dateavailable && data.dateavailable">Available from: {{data.dateavailable}}</p>
+        <p ng-show="currFields.furnished && data.furnished">Furnished: {{data.furnished}}</p>  
+        <p ng-show="currFields.laundry && data.laundry">Laundry: {{data.laundry}}</p>
+        <p ng-show="currFields.parking && data.parking">Parking: {{data.parking}}</p>
+        <p ng-show="currFields.cylinders && data.cylinders">Cylinders: {{data.cylinders}}</p>
+        <p ng-show="currFields.drivetype && data.drivetype">Drive type: {{data.drivetype}}</p>
+        <p ng-show="currFields.color && data.paintcolor">Paint color: {{data.paintcolor}}</p>
+        <p ng-show="currFields.titlestatus && data.titlestatus">Title status: {{data.titlestatus}}</p>
+        <p ng-show="currFields.vehicletype && data.vehicletype">Vehicle type: {{data.vehicletype}}</p>
+        <p ng-show="currFields.employmenttype && data.employmenttype">Employment type: {{data.employmenttype}}</p>
+        <p ng-show="currFields.dealer && data.dealer">Owner/Dealer: {{data.dealer}}</p>
+        <p ng-show="currFields.privateroom && data.privateroom">Private room: {{data.privateroom}}</p>
+        <p ng-show="currFields.privatebath && data.privatebath">Private bath: {{data.privatebath}}</p>
+        <p ng-show="currFields.size && data.sizeid">Size: {{data.sizeid}}</p>
+        <p ng-show="currFields.area && data.area">Propulsion: {{data.propulsionid}}</p>
+    </div>
+</div>
 </div>

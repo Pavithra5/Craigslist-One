@@ -117,7 +117,8 @@ var Vehicletype=require('./models/vehicletype');
                 model:true,
                 dlength:false,
                 dwidth:false,
-                dheight:false
+                dheight:false,
+                year: true
 
             },
             "583e1b582f99e03593d8cb2a":{

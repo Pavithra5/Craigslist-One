@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 
 var conditionSchema = new Schema({
-	_id:Number,
+	_id:Schema.Types.ObjectId,
 	condition:String
 	
 

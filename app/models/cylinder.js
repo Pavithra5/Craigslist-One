@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 
 
 var cylinderSchema = new Schema({
-	_id:Number,
-	condition:Number
+	_id:Schema.Types.ObjectId,
+	cylinders:Number
 	
 
 });

@@ -1,6 +1,9 @@
 // public/js/controllers/CreateClassifiedCtrl.js
 angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedController', function($scope, $http, $routeParams) {
+
 	$scope.subcategoryValue = "";
+
+	$scope.formData = {};
 
 	$('select#subcategoryDD').prop('disabled', true);
 
@@ -164,5 +167,10 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 		angular.forEach($scope.subcategoryFields[$scope.subcategoryValue], function(val, key) {
 			$scope.currFields[key] = val;
 		});
+	}
+
+	$scope.submit = function() {
+		$scope.formData.subcatid = $scope.subcategoryValue;
+		console.log($scope.formData);
 	}
 });

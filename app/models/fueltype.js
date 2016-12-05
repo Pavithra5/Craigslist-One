@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 
 var fueltypeSchema = new Schema({
-	_id:Number,
+	_id:Schema.Types.ObjectId,
 	type:String
 	
 

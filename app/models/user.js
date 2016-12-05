@@ -14,7 +14,7 @@ var userSchema = new Schema({
 	email:String,
 	address:String,
 	city:String,
-	state_id:Number,
+	state_id:Schema.Types.ObjectId,
 	zip:Number,
 	contacttime:String,
 	roleid:Number,

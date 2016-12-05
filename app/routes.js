@@ -918,56 +918,33 @@ var Vehicletype=require('./models/vehicletype');
 
     //To save user details
         app.get('/api/user/create',function(req,res){
+            var userJson = JSON.parse(req.query.user);
             
-            console.log(req.query.user)
-                var newuser=new User(
-                    
-                    /*_id : null,
-                    name:"New user",
-                    phone:"9894044059",
-                    email:"email@email.com",
-                    address:"Address",
-                    city:"Dallas",
-                    state_id:20,
-                    zip:75252,
-                    contacttime:"Morning",
-                    roleid:2,
-                    isactive:1*/req.query.user
-                    
-                
-            );     
+            userJson.state_id = new mongoose.Types.ObjectId(userJson.state_id);
 
-           newuser.save(function (err, newuser) {
+            var newuser=new User(userJson);     
+            
+            newuser.save(function (err, newuser) {
                 if (err) return console.error(err);
-                console.log("User Saved")
-            });
+                console.log("User Saved");
 
+                var userPromise = getUser(userJson.email);
+                userPromise.then(function(user){
+                    console.log(user);
+                    var newpassword=new Password({
+                        _id: null,
+                        userid: user[0]._id,
+                        password: req.query.password
+                    }); 
 
+                    newpassword.save(function (err, newuser) {
+                        if (err) return console.error(err);
+                        console.log("Password Saved");
+                        res.json({msg:"User data Saved!"});
+                    });
 
-           var userPromise = getUser(req.query.user.email);
-            userPromise.then(function(user){
-                var result = {
-                        err:"user not found"
-                    };
-
-            var newpassword=new Password(req.query.password
-                    /*_id:null,
-                    userid:user[0]._id,
-                    password:"password"*/
-            ); 
-
-            newpassword.save(function (err, newuser) {
-                if (err) return console.error(err);
-                console.log("Password Saved")
-            });
-
-
-
-            });
-
-
-
-                
+                });  
+            });              
 
         });
 

@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 
 var passwordSchema = new Schema({
-	_id:Schema.Types.ObjectId,
+	//_id:Schema.Types.ObjectId,
 	userid:Schema.Types.ObjectId,
 	password:String
 	

@@ -213,60 +213,129 @@ var Vehicletype=require('./models/vehicletype');
 
 
 
-        //To save a new classified
+        //To save a new classified/update existing classified
         app.get('/api/classified/save', function(req, res){
-
-            var newpost=new Classified({
-                    
-                    _id : null,
-                    userid : "5835074d2e415690e60becc1",
-                    catid : "582dd2dc3153725a276269c5",
-                    subcatid : "583e1b582f99e03593d8cb0e",
-                    pdate : "12/1/2016",
-                    udate : "12/1/2016",
-                    shortdesc : "For Sale/Antiques",
-                    desc : "For Sale/Antiques",
-                    price : 1200,
-                    location : "Dallas",
-                    area : 0,
-                    bed : 0,
-                    bath : 0,
-                    amenities : "",
-                    image : "",
-                    dlength : 12,
-                    dwidth : 34,
-                    dheight : 45,
-                    conditionid : "5840fbedba57cccf17f3fa4a",
-                    make : "",
-                    model : "",
-                    year : 1556,
-                    transmissionid : null,
-                    fueltype : null,
-                    odometer: 0,
-                    dateavailable : "12/1/2016",
-                    furnished : 0,
-                    isactive : 1,
-                    housetype : null,
-                    laundry : 0,
-                    parking : 0,
-                    cylinders : null,
-                    drivetype : null,
-                    paintcolor : null,
-                    titlestatus : null,
-                    vehicletype : null,
-                    employmenttype : null,
-                    dealer : 0,
-                    privateroom : 0,
-                    privatebath : 0,
-                    sizeid : null,
-                    propulsionid : null
-                
-            });     
-
-           newpost.save(function (err, newpost) {
+            var newClassified={};
+            newClassified.isactive=1;
+            newClassified.userid= new mongoose.Types.ObjectId(req.query.user_id);
+            newClassified.catid = new mongoose.Types.ObjectId(req.query.category_id);
+            newClassified.subcatid = new mongoose.Types.ObjectId(req.query.subcategory_id);
+            newClassified.pdate = req.query.post_date;
+            newClassified.udate = req.query.update_date;
+            if(!req.query.id)
+            {
+                newClassified._id=null;
+            }
+            
+            if(req.query.employmenttype){
+                newClassified.employmenttype=new mongoose.Types.ObjectId(req.query.employmenttype);
+            }
+            
+            if(req.query.conditionid){
+                newClassified.conditionid=new mongoose.Types.ObjectId(req.query.conditionid);
+            }
+            if(req.query.dateavailable){
+                newClassified.dateavailable=req.query.dateavailable;
+            }
+            if(req.query.bed){
+                newClassified.bed=parseInt(req.query.bed);
+            }
+            if(req.query.bath){
+                newClassified.bath=parseInt(req.query.bath);
+            }
+            if(req.query.housetype){
+                newClassified.housetype=new mongoose.Types.ObjectId(req.query.housetype);
+            }
+            if(req.query.laundry){
+                newClassified.laundry=parseInt(req.query.laundry);
+            }
+            if(req.query.parking){
+                newClassified.parking=parseInt(req.query.parking);
+            }
+            if(req.query.furnished){
+                newClassified.furnished=parseInt(req.query.furnished);
+            }
+            if(req.query.privateroom){
+                newClassified.privateroom=parseInt(req.query.privateroom);
+            }
+            if(req.query.privatebath){
+                newClassified.privatebath=parseInt(req.query.privatebath);
+            }
+            if(req.query.colors){
+                newClassified.paintcolor=new mongoose.Types.ObjectId(req.query.colors);
+            }
+            if(req.query.propulsion){
+                newClassified.propulsionid=new mongoose.Types.ObjectId(req.query.propulsion);
+            }
+            if(req.query.cylinder){
+                newClassified.cylinders=new mongoose.Types.ObjectId(req.query.cylinder);
+            }
+            if(req.query.drivetype){
+                newClassified.drivetype=new mongoose.Types.ObjectId(req.query.drivetype);
+            }
+            if(req.query.fueltype){
+                newClassified.fueltype=new mongoose.Types.ObjectId(req.query.fueltype);
+            }
+            if(req.query.size){
+                newClassified.sizeid=new mongoose.Types.ObjectId(req.query.size);
+            }
+            if(req.query.titlestatus){
+                newClassified.titlestatus=new mongoose.Types.ObjectId(req.query.titlestatus);
+            }
+            if(req.query.transmission){
+                newClassified.transmissionid=new mongoose.Types.ObjectId(req.query.transmission);
+            }
+            if(req.query.vehicletype){
+                newClassified.vehicletype=new mongoose.Types.ObjectId(req.query.vehicletype);
+            }
+            if(req.query.make){
+                newClassified.make=req.query.make;
+            }
+            if(req.query.model){
+                newClassified.model=req.query.model;
+            }
+            if(req.query.dealer){
+                newClassified.dealer=parseInt(req.query.dealer);
+            }
+            if(req.query.area){
+                newClassified.area=parseInt(req.query.area); 
+            }
+            if(req.query.price){
+                newClassified.price=parseInt(req.query.price);
+            }
+            if(req.query.width){
+                newClassified.dwidth=parseInt(req.query.width); 
+            }
+            if(req.query.height){
+                newClassified.dheight=parseInt(req.query.height); 
+            }
+            if(req.query.length){
+                newClassified.dlength=parseInt(req.query.length); 
+            }
+            if(req.query.year){
+                newClassified.year=parseInt(req.query.year1); 
+            }
+            if(req.query.odometer){
+                newClassified.odometer=parseInt(req.query.odometer); 
+            }
+       
+            var newpost=new Classified(newClassified);     
+            if(!req.query.id)
+            {
+                newpost.save(function (err, newpost) {
                 if (err) return console.error(err);
-                console.log("Saved")
-            });
+                console.log("Classified Saved");
+                });     
+            }
+            else
+            {
+                newpost.findOneAndUpdate({_id:new mongoose.Types.ObjectId(req.query.id)},newClassified,function(err,result){
+                    if(err) console.log(err);
+                    console.log("Classified updated");
+
+                });
+            }
+           
 
 
             
@@ -610,58 +679,7 @@ var Vehicletype=require('./models/vehicletype');
             res.json(new Classified());
         });
 
-    //To update an existing classified
-        app.get('/api/classified/update',function(req,res){
-                Classified.findOneAndUpdate({_id:"5841fa7fd237416c062f5d5c"},{
-                                              userid : "5835074d2e415690e60becc1",
-                                                catid : "582dd2dc3153725a276269c5",
-                                                subcatid : "583e1b582f99e03593d8cb0e",
-                                                pdate : "12/1/2016",
-                                                udate : "12/1/2016",
-                                                shortdesc : "For Sale/Antiques",
-                                                desc : "For Sale/Antiques changed using update",
-                                                price : 1200,
-                                                location : "Dallas",
-                                                area : 0,
-                                                bed : 0,
-                                                bath : 0,
-                                                amenities : "",
-                                                image : "",
-                                                dlength : 12,
-                                                dwidth : 34,
-                                                dheight : 45,
-                                                conditionid : "5840fc35ba57cccf17f3fa4b",
-                                                make : "",
-                                                model : "",
-                                                year : 1556,
-                                                transmissionid : null,
-                                                fueltype : null,
-                                                odometer: 0,
-                                                dateavailable : "12/1/2016",
-                                                furnished : 0,
-                                                isactive : 1,
-                                                housetype : null,
-                                                laundry : 0,
-                                                parking : 0,
-                                                cylinders : null,
-                                                drivetype : null,
-                                                paintcolor : null,
-                                                titlestatus : null,
-                                                vehicletype : null,
-                                                employmenttype : null,
-                                                dealer : 0,
-                                                privateroom : 0,
-                                                privatebath : 0,
-                                                sizeid : null,
-                                                propulsionid : null},function(err,update){
-                if(err) throw err;
-                
-                   console.log("Updated");
-
-            });
-           
-          });
-
+    
 
 
      //To delete an existing classified
@@ -764,10 +782,11 @@ var Vehicletype=require('./models/vehicletype');
 
         //To create a favorite
         app.get('/api/classified/favorite/create', function(req, res){
+
             var newfav=new Favorite({
                 _id:null,
-                classified_id:"5842150902cab56c06668699",
-                user_id:"5835074d2e415690e60becc1",
+                classified_id:req.params.cid,
+                user_id:req.params.uid,
                 isactive:1
 
             })
@@ -779,19 +798,11 @@ var Vehicletype=require('./models/vehicletype');
 
         });
 
-        //To update a favorite
-        app.get('/api/classified/favorite/edit', function(req, res){
-
-            Favorite.findOneAndUpdate({_id:"5843c5a9ac21ea6021df12ec"},{user_id:"5835074d2e415690e60becc1",classified_id:"5842150902cab56c06668699"},function(err,result){
-                if(err)console.log(err)
-                    console.log("Updated favorite");
-            })
-        });
-
+        
         //To delete a favorite
         app.get('/api/favorite/delete', function(req, res){
 
-            Favorite.findOneAndUpdate({_id:"5843c5a9ac21ea6021df12ec"},{isactive:0},function(err,result){
+            Favorite.findOneAndUpdate({_id:req.params.id},{isactive:0},function(err,result){
                 if(err)console.log(err)
                     else
                     console.log("Deleted favorite");
@@ -995,8 +1006,6 @@ var Vehicletype=require('./models/vehicletype');
     //To match username and password
         app.get('/api/check', function(req, res){
 
-            
-
             function getPass(userid,pass) {
                 return Password.find({"userid":userid}).exec();
             }
@@ -1029,55 +1038,7 @@ var Vehicletype=require('./models/vehicletype');
 
        
 
-        app.get('/api/classifieds', function(req, res) {
-            var testList = [{
-                _id: '101',
-                pDate: '11/1/2016',
-                shortDesc: 'Short description goes here',
-                location: 'location',
-                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
-                price: 5000
-            }, 
-            {
-                _id: '102',
-                pDate: '11/1/2016',
-                shortDesc: 'Short description goes here',
-                location: 'location',
-                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
-                price: 5000
-            },
-            {
-                _id: '103',
-                pDate: '11/1/2016',
-                shortDesc: 'Short description goes here',
-                location: 'location',
-                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
-                price: 5000
-            },
-            {
-                _id: '104',
-                pDate: '11/1/2016',
-                shortDesc: 'Short description goes here',
-                location: 'location',
-                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
-                price: 5000
-            },
-            {
-                _id: '105',
-                pDate: '11/1/2016',
-                shortDesc: 'Short description goes here',
-                location: 'location',
-                image: 'https://images.craigslist.org/01313_jhBOzKb0rQ7_600x450.jpg',
-                price: 5000
-            }];
-            
-            res.json(testList);
-        });
-
-    
-
-
-        // frontend routes =========================================================
+         // frontend routes =========================================================
         // route to handle all angular requests
         app.get('*', function(req, res) {
             res.sendfile('./public/index.html'); // load our public/index.html file

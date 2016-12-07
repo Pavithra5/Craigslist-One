@@ -172,5 +172,12 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 	$scope.submit = function() {
 		$scope.formData.subcatid = $scope.subcategoryValue;
 		console.log($scope.formData);
+		$http('/api/classified/save', {
+			params: {
+				user: $scope.formData
+			}
+		}).then(function(response){
+			console.log(response);
+		});
 	}
 });

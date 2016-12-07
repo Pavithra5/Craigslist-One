@@ -1110,7 +1110,7 @@ var passport = require('passport');
             Favorite.findOneAndUpdate({_id:req.query.id},{isactive : 0},function(error,favresult){
                         if(error) console.log(error)
                             else
-                                res.json(res)
+                                res.json(favresult)
                    })
         });
 

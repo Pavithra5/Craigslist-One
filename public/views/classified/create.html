@@ -2,20 +2,20 @@
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<div class="page-header"><h1>Post a Classified</h1></div>
+		<div class="page-header"><h1><span ng-hide="isEdit">Post</span><span ng-show="isEdit">Edit</span> Classified</h1></div>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-	<div class="row well">
+	<div class="row well" ng-hide="isEdit">
 		<h3>Select Category</h3>
 		<label class="radio-inline" ng-repeat="category in categories">
 			<input type="radio" name="category-radio" ng-model="formData.catid" value="{{category._id}}" ng-click="categoryChange()">{{category.name}}
 		</label>
 	</div>
-	<div class="row well">
+	<div class="row well" ng-hide="isEdit">
 		<h3>Select Subcategory</h3>
 		 <div class="form-group">
 			<select class="form-control" id="subcategoryDD" ng-model="subcategoryValue" ng-change="subcategoryChange()">
@@ -32,7 +32,7 @@
 				<input type="text" ng-model="formData.shortdesc" class="form-control" id="title" placeholder="Enter title">
 			</div>
 			<div class="row">
-				<div ng-show="{{currFields.price}}" class="col-md-4 form-group">
+				<div ng-show="currFields.price" class="col-md-4 form-group">
 					<label for="price">Price:</label>
 					<input type="number" class="form-control" ng-model="formData.price" id="price" placeholder="Enter price">
 				</div>
@@ -55,40 +55,40 @@
 	<div ng-if="subcategoryValue" class="row well">	
 		<h4>Posting Details</h4>
 		<div  class="row">
-			<div ng-show={{currFields.year}} class="col-md-4 form-group">
+			<div ng-show="currFields.year" class="col-md-4 form-group">
   				<label for="model-year">Model year:</label>
   				<select class="form-control" id="model-year" ng-model="formData.year">
 					<option ng-repeat="year in years" value="{{year}}">{{year}}</option>
 				</select>
 			</div>
-			<div ng-show={{currFields.make}} class="col-md-4 form-group">
+			<div ng-show="currFields.make" class="col-md-4 form-group">
   				<label for="make">Make:</label>
   				<input type="text" class="form-control" id="make"  ng-model="formData.make">
 			</div>
 
-			<div ng-show={{currFields.manufacturer}} class="col-md-4 form-group">
+			<div ng-show="currFields.manufacturer" class="col-md-4 form-group">
   				<label for="make">Manufacturer:</label>
   				<input type="text" class="form-control" id="make" ng-model="formData.make">
 			</div>
 
-			<div ng-show={{currFields.model}} class="col-md-4 form-group">
+			<div ng-show="currFields.model" class="col-md-4 form-group">
   				<label for="model">Model:</label>
   				<input type="text" class="form-control" id="model" ng-model="formData.model">
 			</div>
 
-			<div ng-show={{currFields.odometer}} class="col-md-4 form-group">
+			<div ng-show="currFields.odometer" class="col-md-4 form-group">
   				<label for="odometer">Odometer:</label>
   				<input type="text" class="form-control" id="odometer" ng-model="formData.odometer">
 			</div>
 
-			<div ng-show={{currFields.condition}} class="col-md-4 form-group">
+			<div ng-show="currFields.condition" class="col-md-4 form-group">
   				<label for="condition">Condition:</label>
   				<select class="form-control" id="contition" ng-model="formData.conditionid">
 					<option ng-repeat="condition in conditions" value="{{condition._id}}">{{condition.condition}}</option>
 				</select>
 			</div>
 
-			<div ng-show={{currFields.titlestatus}} class="col-md-4 form-group">
+			<div ng-show="currFields.titlestatus" class="col-md-4 form-group">
   				<label for="titlestatus">Title Status:</label>
   				<select class="form-control" id="titlestatus" ng-model="formData.titlestatus">
 					<option ng-repeat="status in statuses" value="{{status._id}}">{{status.status}}</option>
@@ -96,126 +96,126 @@
 			</div>
 
 
-			<div ng-show={{currFields.cylinder}} class="col-md-4 form-group">
+			<div ng-show="currFields.cylinder" class="col-md-4 form-group">
   				<label for="cylinder">Cylinders:</label>
   				<select class="form-control" id="contition"  ng-model="formData.cylinders">
 					<option ng-repeat="cylinder in cylinders" value="{{cylinder._id}}">{{cylinder.cylinders}}</option>
 				</select>
 			</div>
 
-			<div ng-show={{currFields.drivetype}} class="col-md-4 form-group">
+			<div ng-show="currFields.drivetype" class="col-md-4 form-group">
   				<label  for="drive">Drive Type:</label>
   				<select class="form-control" id="drive" ng-model="formData.drivetype">
 					<option ng-repeat="drive in drivetypes" value="{{drive._id}}">{{drive.type}}</option>
 				</select>
 			</div>
 
-			<div ng-show={{currFields.vehicletype}} class="col-md-4 form-group">
+			<div ng-show="currFields.vehicletype" class="col-md-4 form-group">
   				<label  for="vehicletype">Vehicle Type:</label>
   				<select class="form-control" id="vehicletype" ng-model="formData.vehicletype">
 					<option ng-repeat="vehicletype in vehicletypes" value="{{vehicletype._id}}">{{vehicletype.type}}</option>
 				</select>
 			</div>
 
-			<div ng-show={{currFields.fueltype}} class="col-md-4 form-group">
+			<div ng-show="currFields.fueltype" class="col-md-4 form-group">
   				<label for="fuel">Fuel:</label>
   				<select class="form-control" id="fuel" ng-model="formData.fueltype">
 					<option ng-repeat="fuel in fuelTypes" value="{{fuel._id}}">{{fuel.type}}</option>
 				</select>
 			</div>
 
-			<div ng-show={{currFields.colors}} class="col-md-4 form-group">
+			<div ng-show="currFields.colors" class="col-md-4 form-group">
   				<label for="color">Color:</label>
   				<select class="form-control" id="color"  ng-model="formData.paintcolor">
 					<option ng-repeat="color in colors" value="{{color._id}}">{{color.color}}</option>
 				</select>
 			</div>
 
-			<div ng-show={{currFields.size}} class="col-md-4 form-group">
+			<div ng-show="currFields.size" class="col-md-4 form-group">
   				<label for="size">Size:</label>
   				<select class="form-control" id="size" ng-model="formData.sizeid">
 					<option ng-repeat="size in sizes" value="{{size._id}}">{{size.size}}</option>
 				</select>
 			</div>
 
-			<div ng-show={{currFields.transmission}} class="col-md-4 form-group">
+			<div ng-show="currFields.transmission" class="col-md-4 form-group">
   				<label for="transmission">Transmission:</label>
   				<select class="form-control" id="transmission" ng-model="formData.transmissionid">
 					<option ng-repeat="transmission in transmissions" value="{{transmission._id}}">{{transmission.type}}</option>
 				</select>
 			</div>
 
-			<div ng-show="{{currFields.dlength}}" class="col-md-4 form-group">
+			<div ng-show="currFields.dlength" class="col-md-4 form-group">
 				<label for="dlength">Length:</label>
 				<input type="number" class="form-control" id="dlength" ng-model="formData.dlength">
 			</div>
-			<div ng-show="{{currFields.dwidth}}" class="col-md-4 form-group">
+			<div ng-show="currFields.dwidth" class="col-md-4 form-group">
 				<label for="dwidth">Width:</label>
 				<input type="number" class="form-control" id="dwidth" ng-model="formData.dwidth">
 			</div>
-			<div ng-show="{{currFields.dheight}}" class="col-md-4 form-group">
+			<div ng-show="currFields.dheight" class="col-md-4 form-group">
 				<label for="dheight">Height:</label>
 				<input type="number" class="form-control" id="dheight" ng-model="formData.dheight">
 			</div>
 
-			<div ng-show={{currFields.employmenttype}} class="col-md-4 form-group">
+			<div ng-show="currFields.employmenttype" class="col-md-4 form-group">
   				<label for="employmenttype">Employment Type:</label>
   				<select class="form-control" id="employmenttype" ng-model="formData.employmenttype">
 					<option ng-repeat="employment in employmenttypes" value="{{employment._id}}">{{employment.type}}</option>
 				</select>
 			</div>
 
-			<div ng-show="{{currFields.compensation}}" class="col-md-4 form-group">
+			<div ng-show="currFields.compensation" class="col-md-4 form-group">
 				<label for="price">Compensation:</label>
 				<input type="number" class="form-control" id="price"  ng-model="formData.price">
 			</div>
 
-			<div ng-show="{{currFields.area}}" class="col-md-4 form-group">
+			<div ng-show="currFields.area" class="col-md-4 form-group">
 				<label for="area">Area (sqft):</label>
 				<input type="number" class="form-control" id="area" ng-model="formData.area">
 			</div>
 
-			<div ng-show={{currFields.bed}} class="col-md-4 form-group">
+			<div ng-show="currFields.bed" class="col-md-4 form-group">
   				<label for="bed">Bedrooms:</label>
   				<select class="form-control" id="bed" ng-model="formData.bed">
-					<option value="1" selected="true">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
 				</select>
 			</div>
 
-			<div ng-show={{currFields.bath}} class="col-md-4 form-group">
+			<div ng-show="currFields.bath" class="col-md-4 form-group">
   				<label for="bath">Bathrooms:</label>
   				<select class="form-control" id="bath" ng-model="formData.bath">
-					<option value="1" selected="true">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
 				</select>
 			</div>
 
-			<div ng-show="{{currFields.dateavailable}}" class="col-md-4 form-group">
+			<div ng-show="currFields.dateavailable" class="col-md-4 form-group">
 				<label for="dateavailable">Date Available:</label>
 				<input type="datepicker" class="form-control" id="dateavailable" ng-model="formData.dateavailable">
 			</div>
 
-			<div ng-show={{currFields.housetype}} class="col-md-4 form-group">
+			<div ng-show="currFields.housetype" class="col-md-4 form-group">
   				<label for="housetype">House Type:</label>
   				<select class="form-control" id="housetype" ng-model="formData.housetype">
 					<option ng-repeat="house in housetypes" value="{{house._id}}">{{house.type}}</option>
 				</select>
 			</div>
 
-			<div ng-show="{{currFields.furnished}}" class="col-md-4 checkbox">
+			<div ng-show="currFields.furnished" class="col-md-4 checkbox">
   				<label><input type="checkbox" id="furnished" value="1" ng-model="formData.furnished">Furnished</label>
 			</div>
 
-			<div ng-show="{{currFields.laundry}}" class="col-md-4 checkbox">
+			<div ng-show="currFields.laundry" class="col-md-4 checkbox">
   				<label><input type="checkbox" id="laundry" value="1" ng-model="formData.laundry">Laundry</label>
 			</div>	
 
-			<div ng-show="{{currFields.parking}}" class="col-md-4 checkbox">
+			<div ng-show="currFields.parking" class="col-md-4 checkbox">
   				<label><input type="checkbox" id="parking" value="1" ng-model="formData.parking">Parking</label>
 			</div>
 
@@ -226,7 +226,8 @@
 	<div ng-show = "subcategoryValue" class="col-md-12">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
-				<button ng-click="submit()" class="btn btn-lg btn-craigslist btn-block">Create</button>
+				<button ng-click="submit()" ng-if="!isEdit" class="btn btn-lg btn-craigslist btn-block">Create</button>
+				<button ng-click="save()" ng-if="isEdit" class="btn btn-lg btn-craigslist btn-block">Save</button>
 			</div>
 		</div>
 </div>

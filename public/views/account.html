@@ -24,7 +24,7 @@
 		  		<td><a href="/classified/{{classified._id}}" style="font-weight: bold;">{{classified.shortdesc}}</a></td>
 		  		<td>{{classified.pdate}}</td>
 		  		<td>{{classified.categ[0].name}} / {{classified.subcateg[0].name}}</td>
-		  		<td><button class="btn btn-default">Edit</button> <button class="btn btn-warning" ng-click="deleteClassified(classified._id)">Delete</button></td>
+		  		<td><button class="btn btn-default" ng-click="editClassified(classified._id)">Edit</button> <button class="btn btn-warning" ng-click="deleteClassified(classified._id)">Delete</button></td>
 		      </tr>
 		    </tbody>
 		</table>

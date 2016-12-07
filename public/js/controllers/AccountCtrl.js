@@ -24,6 +24,10 @@ angular.module('AccountCtrl', []).controller('AccountController', function($scop
 		});
 	}
 
+	$scope.editClassified = function(id) {
+		$location.url('/classified/'+id+'/edit');
+	}
+
 	function updateListing() {
 		$http.get('/api/classified/show', {
 			params: {

@@ -341,7 +341,7 @@ var passport = require('passport');
             //{
                 newpost.save(function (err, newpost) {
                 if (err) return console.error(err);
-                console.log("Classified Saved");
+                res.json(newpost);
                 });     
             /*}
             else
@@ -984,7 +984,15 @@ var passport = require('passport');
             });
         });
 
+    //To get a single user object
+        app.get('/api/user/create',function(req,res){
+           
+            User.find({_id:req.params.id},function(err,resp){
+                res.json(resp);
+            })
 
+
+        });
     //To save user details
         app.get('/api/user/create',function(req,res){
             var userJson = JSON.parse(req.query.user);

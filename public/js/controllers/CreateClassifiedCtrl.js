@@ -171,8 +171,8 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 
 	$scope.submit = function() {
 		$scope.formData.subcatid = $scope.subcategoryValue;
-		console.log($scope.formData);
-		$http('/api/classified/save', {
+		//console.log($scope.formData);
+		$http.get('/api/classified/save', {
 			params: {
 				user: $scope.formData
 			}

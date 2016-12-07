@@ -596,10 +596,10 @@ var passport = require('passport');
                     
                 }
 
-            }/*,
+            },
             {$sort: {shortdesc: 1}},
             {$skip:(req.query.page-1)*2},
-            {$limit: 2},*/
+            {$limit: 2},
             
 
 

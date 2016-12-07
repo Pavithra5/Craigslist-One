@@ -35,16 +35,16 @@
 		      <tr>
 		        <th>Title</th>
 		        <th>Date Posted</th>
-		        <th>Category / Subcategory</th>
+		        <th>Description</th>
 		        <th>Actions</th>
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr ng-repeat="classified in classifieds">
-		  		<td><a href="/classified/{{classified._id}}" style="font-weight: bold;">{{classified.shortdesc}}</a></td>
-		  		<td>{{classified.pdate}}</td>
-		  		<td>{{classified.categ[0].name}} / {{classified.subcateg[0].name}}</td>
-		  		<td><button class="btn btn-warning">Remove as Favorite</button></td>
+		      <tr ng-repeat="favorite in favorites">
+		  		<td><a href="/classified/{{favorite.classified[0]._id}}" style="font-weight: bold;">{{favorite.classified[0].shortdesc}}</a></td>
+		  		<td>{{favorite.classified[0].pdate}}</td>
+		  		<td>{{favorite.classified[0].desc}}</td>
+		  		<td><button class="btn btn-warning" ng-click="removeFavorite(favorite._id)">Remove as Favorite</button></td>
 		      </tr>
 		    </tbody>
 		</table>

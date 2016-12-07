@@ -43,6 +43,17 @@ angular.module('AccountCtrl', []).controller('AccountController', function($scop
 			}
 			}).then(function(response){
 				console.log(response.data);
+				$scope.favorites = response.data;
 			});
+	}
+
+	$scope.removeFavorite= function(id) {
+		$http.get('/api/favorite/delete', {
+			params: {
+			'id': id	
+			}
+			
+		});
+		updateListing();
 	}
 });

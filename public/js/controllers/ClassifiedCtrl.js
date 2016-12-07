@@ -8,7 +8,16 @@ angular.module('ClassifiedCtrl', []).controller('ClassifiedController', function
 				$scope.user = $cookies.get('user');
 				if($scope.data.userid != $scope.user){
 					$scope.canFavourite = true;
-					
+					$http.get('/api/classified/favorite', {
+					params: {
+						'uid': $scope.user,
+						'cid': $scope.data._id
+					}
+					}).then(function(response){
+						if(response.data[0]){
+							$scope.isFavourite = true;
+						}
+					});
 				}
 			}
 			$http.get('/api/categoryFields')
@@ -30,5 +39,18 @@ angular.module('ClassifiedCtrl', []).controller('ClassifiedController', function
         .error(function(data) {
             console.log('Error: ' + data);
         });
+
+
+        $scope.makeFavorite = function(){
+        	if(!$scope.isFavourite) {
+	        	$http.get('/api/classified/favorite/create', {
+	        		params: {
+	        			uid: $scope.user,
+	        			cid: $scope.data._id
+	        		}
+	        	});
+	        	$scope.isFavourite = true;
+        	}
+        }
 
 });

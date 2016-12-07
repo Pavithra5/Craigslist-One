@@ -36,5 +36,13 @@ angular.module('AccountCtrl', []).controller('AccountController', function($scop
 			}).then(function(response){
 				$scope.classifieds = response.data;
 			});
+
+			$http.get('/api/classified/favorite', {
+			params: {
+				'uid': $scope.user._id
+			}
+			}).then(function(response){
+				console.log(response.data);
+			});
 	}
 });

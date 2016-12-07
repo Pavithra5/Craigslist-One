@@ -1107,7 +1107,7 @@ var passport = require('passport');
         //To delete a favorite
         app.get('/api/favorite/delete', function(req, res){
 
-            Favorite.findOneAndUpdate({user_id:update.userid,classified_id:req.query.id},{isactive : 0},function(error,favresult){
+            Favorite.findOneAndUpdate({_id:req.query.id},{isactive : 0},function(error,favresult){
                         if(error) console.log(error)
                             else
                                 res.json(res)

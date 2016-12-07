@@ -215,109 +215,6 @@ var passport = require('passport');
 
         //To save a new classified/update existing classified
         app.get('/api/classified/save', function(req, res){
-            /*var newClassified={};
-            newClassified.isactive=1;
-            newClassified.userid= new mongoose.Types.ObjectId(req.query.user_id);
-            newClassified.catid = new mongoose.Types.ObjectId(req.query.category_id);
-            newClassified.subcatid = new mongoose.Types.ObjectId(req.query.subcategory_id);
-            newClassified.pdate = req.query.post_date;
-            newClassified.udate = req.query.update_date;
-            if(!req.query.id)
-            {
-                newClassified._id=null;
-            }
-            
-            if(req.query.employmenttype){
-                newClassified.employmenttype=new mongoose.Types.ObjectId(req.query.employmenttype);
-            }
-            
-            if(req.query.conditionid){
-                newClassified.conditionid=new mongoose.Types.ObjectId(req.query.conditionid);
-            }
-            if(req.query.dateavailable){
-                newClassified.dateavailable=req.query.dateavailable;
-            }
-            if(req.query.bed){
-                newClassified.bed=parseInt(req.query.bed);
-            }
-            if(req.query.bath){
-                newClassified.bath=parseInt(req.query.bath);
-            }
-            if(req.query.housetype){
-                newClassified.housetype=new mongoose.Types.ObjectId(req.query.housetype);
-            }
-            if(req.query.laundry){
-                newClassified.laundry=parseInt(req.query.laundry);
-            }
-            if(req.query.parking){
-                newClassified.parking=parseInt(req.query.parking);
-            }
-            if(req.query.furnished){
-                newClassified.furnished=parseInt(req.query.furnished);
-            }
-            if(req.query.privateroom){
-                newClassified.privateroom=parseInt(req.query.privateroom);
-            }
-            if(req.query.privatebath){
-                newClassified.privatebath=parseInt(req.query.privatebath);
-            }
-            if(req.query.colors){
-                newClassified.paintcolor=new mongoose.Types.ObjectId(req.query.colors);
-            }
-            if(req.query.propulsion){
-                newClassified.propulsionid=new mongoose.Types.ObjectId(req.query.propulsion);
-            }
-            if(req.query.cylinder){
-                newClassified.cylinders=new mongoose.Types.ObjectId(req.query.cylinder);
-            }
-            if(req.query.drivetype){
-                newClassified.drivetype=new mongoose.Types.ObjectId(req.query.drivetype);
-            }
-            if(req.query.fueltype){
-                newClassified.fueltype=new mongoose.Types.ObjectId(req.query.fueltype);
-            }
-            if(req.query.size){
-                newClassified.sizeid=new mongoose.Types.ObjectId(req.query.size);
-            }
-            if(req.query.titlestatus){
-                newClassified.titlestatus=new mongoose.Types.ObjectId(req.query.titlestatus);
-            }
-            if(req.query.transmission){
-                newClassified.transmissionid=new mongoose.Types.ObjectId(req.query.transmission);
-            }
-            if(req.query.vehicletype){
-                newClassified.vehicletype=new mongoose.Types.ObjectId(req.query.vehicletype);
-            }
-            if(req.query.make){
-                newClassified.make=req.query.make;
-            }
-            if(req.query.model){
-                newClassified.model=req.query.model;
-            }
-            if(req.query.dealer){
-                newClassified.dealer=parseInt(req.query.dealer);
-            }
-            if(req.query.area){
-                newClassified.area=parseInt(req.query.area); 
-            }
-            if(req.query.price){
-                newClassified.price=parseInt(req.query.price);
-            }
-            if(req.query.width){
-                newClassified.dwidth=parseInt(req.query.width); 
-            }
-            if(req.query.height){
-                newClassified.dheight=parseInt(req.query.height); 
-            }
-            if(req.query.length){
-                newClassified.dlength=parseInt(req.query.length); 
-            }
-            if(req.query.year){
-                newClassified.year=parseInt(req.query.year1); 
-            }
-            if(req.query.odometer){
-                newClassified.odometer=parseInt(req.query.odometer); 
-            }*/
             var classifiedJSON=JSON.parse(req.query.user);
             classifiedJSON.catid=new mongoose.Types.ObjectId(classifiedJSON.catid);
             classifiedJSON.subcatid=new mongoose.Types.ObjectId(classifiedJSON.subcatid);
@@ -325,8 +222,8 @@ var passport = require('passport');
             
             
 
-            if(classifiedJSON.userid!==undefined)
-               classifiedJSON.userid=new mongoose.Types.ObjectId(classifiedJSON.userid);
+            /*if(classifiedJSON.userid!==undefined)
+               classifiedJSON.userid=new mongoose.Types.ObjectId(classifiedJSON.userid);*/
 
             if(classifiedJSON.conditionid!==undefined)
                 classifiedJSON.conditionid=new mongoose.Types.ObjectId(classifiedJSON.conditionid);
@@ -378,7 +275,7 @@ var passport = require('passport');
             else
             {
                 var newpost=new Classified(classifiedJSON);
-                newpost.findOneAndUpdate({_id:new mongoose.Types.ObjectId(classifiedJSON._id)},newClassified,function(err,result){
+                newpost.findOneAndUpdate({_id:new mongoose.Types.ObjectId(classifiedJSON._id)},classifiedJSON,function(err,result){
                     if(err) console.log(err);
                     console.log("Classified updated");
 

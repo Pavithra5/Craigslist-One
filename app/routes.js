@@ -20,6 +20,7 @@ var Titlestatus=require('./models/titlestatus');
 var Transmission=require('./models/transmission');
 var User = require('./models/user');
 var Vehicletype=require('./models/vehicletype');
+var passport = require('passport');
 
 
     
@@ -28,7 +29,6 @@ var Vehicletype=require('./models/vehicletype');
         // server routes ===========================================================
         // handle things like api calls
         // authentication routes
-
 
         var categoryFields={
 

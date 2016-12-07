@@ -4,6 +4,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+
+
 //create a schema
 
 
@@ -21,9 +23,6 @@ var userSchema = new Schema({
 	isactive:Number
 
 });
-
-
-
 
 
 //create a model usiing the schema

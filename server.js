@@ -6,9 +6,9 @@ var app            	= express();
 var bodyParser     	= require('body-parser');
 var methodOverride 	= require('method-override');
 var mongoose		= require('mongoose');
-const passport 		= require('passport')  
-const session 		= require('express-session')  
-const RedisStore 	= require('connect-redis')(session)
+const passport 		= require('passport'); 
+var cookieParser 	= require('cookie-parser');
+var session 		= require('express-session')
 // configuration ===========================================
     
 // config files
@@ -21,18 +21,16 @@ var port = process.env.PORT || 8080;
 // connect to our mongoDB database 
 // (uncomment after you enter in your own credentials in config/db.js)
 
- mongoose.connect(db.url); 
+mongoose.connect(db.url); 
 
- app.use(session({  
-  store: new RedisStore({
-    url: index.url
-  }),
-  secret: index.secret,
-  resave: false,
-  saveUninitialized: false
-}));
 app.use(passport.initialize());  
 app.use(passport.session());  
+app.use(cookieParser());
+app.use(session({
+    secret: 'secret', // just a long random string
+    resave: false,
+    saveUninitialized: true
+}));
 
 
 // get all data/stuff of the body (POST) parameters

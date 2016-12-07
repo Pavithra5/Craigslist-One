@@ -1045,17 +1045,17 @@ var passport = require('passport');
             var query=Favorite.aggregate([
             {
                 $match:
-                {
+                
                     favFilter
-                }
+                
             },
             {
                 $lookup:
                 {   
 
                     from: "users",
-                    localField: "_id",
-                    foreignField: "user_id",
+                    localField: "user_id",
+                    foreignField: "_id",
                     as: "user"
                 }
 
@@ -1064,8 +1064,8 @@ var passport = require('passport');
                 $lookup:
                 {
                     from:"classified",
-                    localField:"_id",
-                    foreignField:"classified_id",
+                    localField:"classified_id",
+                    foreignField:"_id",
                     as:"classified"
                 }
             }

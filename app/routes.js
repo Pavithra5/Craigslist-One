@@ -1097,7 +1097,7 @@ var passport = require('passport');
             })
             newfav.save(function(err,result){
                 if(err)console.log(err);
-                console.log("Favorite added");
+                res.json(result)
             })
 
 
@@ -1110,7 +1110,7 @@ var passport = require('passport');
             Favorite.findOneAndUpdate({user_id:update.userid,classified_id:req.query.id},{isactive : 0},function(error,favresult){
                         if(error) console.log(error)
                             else
-                                console.log("Favorite deleted")
+                                res.json(res)
                    })
         });
 

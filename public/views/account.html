@@ -1,1 +1,40 @@
-{{user.name}}
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" id="accountTab">
+    <li role="presentation"><a href="#classifieds" aria-controls="classifieds" role="tab" data-toggle="tab">My Classifieds</a></li>
+    <li role="presentation"><a href="#favorites" aria-controls="favorites" role="tab" data-toggle="tab">Favorites</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="classifieds">
+    	<table class="table table-striped">
+		    <thead>
+		      <tr>
+		        <th>Title</th>
+		        <th>Date Posted</th>
+		        <th>Category / Subcategory</th>
+		        <th>Actions</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="classified in classifieds">
+		  		<td><a href="/classified/{{classified._id}}" style="font-weight: bold;">{{classified.shortdesc}}</a></td>
+		  		<td>{{classified.pdate}}</td>
+		  		<td>{{classified.categ[0].name}} / {{classified.subcateg[0].name}}</td>
+		  		<td><button class="btn btn-default">Edit</button> <button class="btn btn-warning">Delete</button></td>
+		      </tr>
+		    </tbody>
+		</table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="favorites">
+    	
+    </div>
+    <div role="tabpanel" class="tab-pane" id="settings">
+    	
+    </div>
+  </div>
+
+</div>

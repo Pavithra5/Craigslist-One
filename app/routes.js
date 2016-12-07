@@ -361,7 +361,7 @@ var passport = require('passport');
 
         //To display an existing classified
         app.get('/api/classified/show', function(req, res){
-        
+        console.log(req.params);
         var filter={};
         filter.isactive=1;
         if(req.query.classified_id){
@@ -985,9 +985,9 @@ var passport = require('passport');
         });
 
     //To get a single user object
-        app.get('/api/user/create',function(req,res){
-           
-            User.find({_id:req.params.id},function(err,resp){
+        app.get('/api/user',function(req,res){
+           console.log(req.query);
+            User.find({_id:req.query.id},function(err,resp){
                 res.json(resp);
             })
 

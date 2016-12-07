@@ -1,6 +1,17 @@
 // public/js/controllers/MainCtrl.js
-angular.module('MainCtrl', []).controller('MainController', function($scope, $http, $location) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $http, $location, $cookies) {
 	
+	$scope.user = $cookies.get('user');
+	if($scope.user) {
+		$http.get('/api/user', {
+			params: {
+				id: $scope.user
+			}
+		}).then(function(response){
+			$scope.user = response.data[0];
+		});
+	}
+
 	$http.get('/api/categories/')
 	.success(function(data){
 		angular.forEach(data, function(value){
@@ -19,7 +30,13 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
 	}
 
 	$scope.myAccount = function() {
-		$location.url('/login')
+		$location.url('/account')
+	}
+
+	$scope.logout = function() {
+		$cookies.remove('user');
+		$scope.user = null;
+		$location.url('/');
 	}
 
 });

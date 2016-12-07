@@ -1,4 +1,4 @@
-angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, $location) {
+angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, $location, $cookies) {
 
 	$scope.email = "";
 	$scope.password = "";
@@ -14,7 +14,7 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
 				$scope.err = data.err;
 			} else {
 				$scope.err = "";
-				$scope.$root.user = data[0];
+				$cookies.put('user', data[0]._id);
 				$location.url('/account');
 			}
 		});

@@ -3,10 +3,10 @@
 	<div class="col-md-2">
 		<button ng-click="postAClassified()" class="btn btn-lg btn-default">Post a Classified</button>
 	</div>
-	<div class="col-md-5 home-date">
+	<div class="col-md-4 home-date">
         <p>{{date | date:'EEEE, MMM d, y'}}</p>
 	</div>
-	<div class="col-md-5">
+	<div class="col-md-4">
 		<div class="input-group input-group-lg">
       <input type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
@@ -14,6 +14,11 @@
       </span>
     </div>
 	</div>
+	
+    <div class="col-md-2">
+    	<button ng-click="logout()" class="btn btn-lg btn-default" ng-show="user">Log Out</button>
+    	<button ng-click="myAccount()" class="btn btn-lg btn-default" ng-hide="user">Log In</button>
+    </div>
 </div>
 <div class="row">
 	<div class="col-md-3" ng-repeat="category in categories | orderBy: 'name'">		

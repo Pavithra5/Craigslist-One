@@ -977,7 +977,7 @@ var passport = require('passport');
                 if(err) throw err;
                 
                    console.log("Updated user id"+update.userid);
-                    Favorite.findOneAndUpdate({user_id:update.userid,classified_id:req.query.id},{isactive : 0},function(error,favresult){
+                    Favorite.findOneAndUpdate({classified_id:req.query.id},{isactive : 0},function(error,favresult){
                         if(error) console.log(error)
                             else
                                 console.log("Favorite deleted")

@@ -8,6 +8,7 @@ angular.module('ClassifiedCtrl', []).controller('ClassifiedController', function
 				$scope.user = $cookies.get('user');
 				if($scope.data.userid != $scope.user){
 					$scope.canFavourite = true;
+					$scope.mailTo="mailto:"+ $scope.data.user[0].email +"?subject=I am interested in your post about "+$scope.data.shortdesc;
 					$http.get('/api/classified/favorite', {
 					params: {
 						'uid': $scope.user,

@@ -29,7 +29,8 @@
         <p class="cd-desc">
         <label>Description:</label> {{data.desc}}</p>
         <p>Post Id:{{data._id}}</p>
-        <p>Posted by: {{data.user[0].name}}</p>
+        <p ng-if="canFavourite">Posted by: <a href="{{mailTo}}">{{data.user[0].name}} <i class="fa fa-envelope" aria-hidden="true"></i></a></p>
+        <p ng-if="!canFavourite">Posted by: {{data.user[0].name}}</p>
         <p>Date posted: {{data.pdate}}</p>
         <p>Date last updated: {{data.udate}}</p>
 

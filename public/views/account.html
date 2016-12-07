@@ -30,10 +30,41 @@
 		</table>
     </div>
     <div role="tabpanel" class="tab-pane" id="favorites">
-    	
+    	<table class="table table-striped">
+		    <thead>
+		      <tr>
+		        <th>Title</th>
+		        <th>Date Posted</th>
+		        <th>Category / Subcategory</th>
+		        <th>Actions</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="classified in classifieds">
+		  		<td><a href="/classified/{{classified._id}}" style="font-weight: bold;">{{classified.shortdesc}}</a></td>
+		  		<td>{{classified.pdate}}</td>
+		  		<td>{{classified.categ[0].name}} / {{classified.subcateg[0].name}}</td>
+		  		<td><button class="btn btn-warning">Remove as Favorite</button></td>
+		      </tr>
+		    </tbody>
+		</table>
     </div>
     <div role="tabpanel" class="tab-pane" id="settings">
-    	
+    	<div class="col-md-12">
+    		<div class="col-md-4"></div>
+    		<div class="col-md-4" style="text-align: center;">
+    			<div class="row">
+    				<div>Name: <label>{{user.name}}</label></div>
+    				<div>Email: <label>{{user.email}}</label></div>
+    				<div>Phone: <label>{{user.phone}}</label></div>
+    				<div>Address: <label>{{user.address}}</label></div>
+    				<div>City: <label>{{user.city}}</label></div>
+    			</div>
+    			<div class="row">
+    				<button class="btn btn-default">Change Password</button>
+    			</div>
+    		</div>
+    	</div>
     </div>
   </div>
 

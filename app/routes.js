@@ -215,7 +215,7 @@ var Vehicletype=require('./models/vehicletype');
 
         //To save a new classified/update existing classified
         app.get('/api/classified/save', function(req, res){
-            var newClassified={};
+            /*var newClassified={};
             newClassified.isactive=1;
             newClassified.userid= new mongoose.Types.ObjectId(req.query.user_id);
             newClassified.catid = new mongoose.Types.ObjectId(req.query.category_id);
@@ -317,16 +317,33 @@ var Vehicletype=require('./models/vehicletype');
             }
             if(req.query.odometer){
                 newClassified.odometer=parseInt(req.query.odometer); 
-            }
-       
-            var newpost=new Classified(newClassified);     
-            if(!req.query.id)
-            {
+            }*/
+            var classifiedJSON=JSON.parse(req.query.user);
+                classifiedJSON._id=new mongoose.Types.ObjectId(classifiedJSON._id);
+                classifiedJSON.catid=new mongoose.Types.ObjectId(classifiedJSON.catid);
+                classifiedJSON.subcatid=new mongoose.Types.ObjectId(classifiedJSON.subcatid);
+                classifiedJSON.userid=new mongoose.Types.ObjectId(classifiedJSON.userid);
+                classifiedJSON.conditionid=new mongoose.Types.ObjectId(classifiedJSON.conditionid);
+                classifiedJSON.transmissionid=new mongoose.Types.ObjectId(classifiedJSON.transmissionid);
+                classifiedJSON.fueltype=new mongoose.Types.ObjectId(classifiedJSON.fueltype);
+                classifiedJSON.housetype=new mongoose.Types.ObjectId(classifiedJSON.housetype);
+                classifiedJSON.cylinders=new mongoose.Types.ObjectId(classifiedJSON.cylinders);
+                classifiedJSON.drivetype=new mongoose.Types.ObjectId(classifiedJSON.drivetype);
+                classifiedJSON.paintcolor=new mongoose.Types.ObjectId(classifiedJSON.paintcolor);
+                classifiedJSON.titlestatus=new mongoose.Types.ObjectId(classifiedJSON.titlestatus);
+                classifiedJSON.vehicletype=new mongoose.Types.ObjectId(classifiedJSON.vehicletype);
+                classifiedJSON.employmenttype=new mongoose.Types.ObjectId(classifiedJSON.employmenttype);
+                classifiedJSON.sizeid=new mongoose.Types.ObjectId(classifiedJSON.sizeid);
+                classifiedJSON.propulsionid=new mongoose.Types.ObjectId(classifiedJSON.propulsionid);
+
+            var newpost=new Classified(classifiedJSON);     
+            //if(!req.query.id)
+            //{
                 newpost.save(function (err, newpost) {
                 if (err) return console.error(err);
                 console.log("Classified Saved");
                 });     
-            }
+            /*}
             else
             {
                 newpost.findOneAndUpdate({_id:new mongoose.Types.ObjectId(req.query.id)},newClassified,function(err,result){
@@ -335,7 +352,7 @@ var Vehicletype=require('./models/vehicletype');
 
                 });
             }
-           
+           */
 
 
             

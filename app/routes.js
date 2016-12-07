@@ -1035,14 +1035,26 @@ var passport = require('passport');
     //To get the favorites
         app.get('/api/classified/favorite', function(req, res){
             
+            var favFilter={};
+            if(req.query.uid)
+                favFilter.user_id=new mongoose.Types.ObjectId(req.query.uid);
+            if(req.query.cid)
+                favFilter.classified_id=new mongoose.Types.ObjectId(req.query.cid);
+            favFilter.isactive=1;
 
             var query=Favorite.aggregate([
+            {
+                $match:
+                {
+                    favFilter
+                }
+            },
             {
                 $lookup:
                 {   
 
-                    from: "classified",
-                    localField: "userid",
+                    from: "users",
+                    localField: "_id",
                     foreignField: "user_id",
                     as: "user"
                 }
@@ -1078,8 +1090,8 @@ var passport = require('passport');
 
             var newfav=new Favorite({
                 _id:null,
-                classified_id:req.params.cid,
-                user_id:req.params.uid,
+                classified_id:req.query.cid,
+                user_id:req.query.uid,
                 isactive:1
 
             })
@@ -1095,11 +1107,11 @@ var passport = require('passport');
         //To delete a favorite
         app.get('/api/favorite/delete', function(req, res){
 
-            Favorite.findOneAndUpdate({_id:req.params.id},{isactive:0},function(err,result){
-                if(err)console.log(err)
-                    else
-                    console.log("Deleted favorite");
-            })
+            Favorite.findOneAndUpdate({user_id:update.userid,classified_id:req.query.id},{isactive : 0},function(error,favresult){
+                        if(error) console.log(error)
+                            else
+                                console.log("Favorite deleted")
+                   })
         });
 
 

@@ -7,16 +7,30 @@ angular.module('AccountCtrl', []).controller('AccountController', function($scop
 			}
 		}).then(function(response){
 			$scope.user = response.data[0];
-			$http.get('/api/classified/show', {
-			params: {
-				'user_id': '5835074d2e415690e60becc1'//$scope.user._id
-			}
-			}).then(function(response){
-				$scope.classifieds = response.data;
-			});
+			updateListing();
 		});
 
 	} else {
 		$location.url('/login');
+	}
+
+	$scope.deleteClassified=function(id){
+		$http.get('api/classified/delete',{
+			params: {
+				'id': id
+			}
+		}).then(function (response) {
+			updateListing();
+		});
+	}
+
+	function updateListing() {
+		$http.get('/api/classified/show', {
+			params: {
+				'user_id': $scope.user._id
+			}
+			}).then(function(response){
+				$scope.classifieds = response.data;
+			});
 	}
 });

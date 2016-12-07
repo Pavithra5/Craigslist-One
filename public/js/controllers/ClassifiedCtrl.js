@@ -8,9 +8,10 @@ angular.module('ClassifiedCtrl', []).controller('ClassifiedController', function
 			.then(function(response){
 				$scope.categoryFields = response.data;
 				$http.get('/api/subcategoryFields')
-				.then(function(data){
-					$scope.subcategoryFields = data;
+				.then(function(response){
+					$scope.subcategoryFields = response.data;
 					$scope.currFields = $scope.categoryFields[$scope.data.catid];
+					console.log($scope.currFields);
 					$scope.subcategoryValue = $scope.data.subcatid;
 					angular.forEach($scope.subcategoryFields[$scope.subcategoryValue], function(val, key) {
 						$scope.currFields[key] = val;

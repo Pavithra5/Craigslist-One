@@ -319,40 +319,72 @@ var passport = require('passport');
                 newClassified.odometer=parseInt(req.query.odometer); 
             }*/
             var classifiedJSON=JSON.parse(req.query.user);
-                classifiedJSON._id=new mongoose.Types.ObjectId(classifiedJSON._id);
-                classifiedJSON.catid=new mongoose.Types.ObjectId(classifiedJSON.catid);
-                classifiedJSON.subcatid=new mongoose.Types.ObjectId(classifiedJSON.subcatid);
-                classifiedJSON.userid=new mongoose.Types.ObjectId(classifiedJSON.userid);
+            classifiedJSON.catid=new mongoose.Types.ObjectId(classifiedJSON.catid);
+            classifiedJSON.subcatid=new mongoose.Types.ObjectId(classifiedJSON.subcatid);
+            /*classifiedJSON.isactive=1;*/
+            
+            
+
+            if(classifiedJSON.userid!==undefined)
+               classifiedJSON.userid=new mongoose.Types.ObjectId(classifiedJSON.userid);
+
+            if(classifiedJSON.conditionid!==undefined)
                 classifiedJSON.conditionid=new mongoose.Types.ObjectId(classifiedJSON.conditionid);
+
+            if(classifiedJSON.transmissionid!==undefined)
                 classifiedJSON.transmissionid=new mongoose.Types.ObjectId(classifiedJSON.transmissionid);
+
+            if(classifiedJSON.fueltype!==undefined)
                 classifiedJSON.fueltype=new mongoose.Types.ObjectId(classifiedJSON.fueltype);
+
+            if(classifiedJSON.housetype!==undefined)
                 classifiedJSON.housetype=new mongoose.Types.ObjectId(classifiedJSON.housetype);
+
+            if(classifiedJSON.cylinders!==undefined)
                 classifiedJSON.cylinders=new mongoose.Types.ObjectId(classifiedJSON.cylinders);
+
+            if(classifiedJSON.drivetype!==undefined)
                 classifiedJSON.drivetype=new mongoose.Types.ObjectId(classifiedJSON.drivetype);
+
+            if(classifiedJSON.paintcolor!==undefined)
                 classifiedJSON.paintcolor=new mongoose.Types.ObjectId(classifiedJSON.paintcolor);
+
+            if(classifiedJSON.titlestatus!==undefined)
                 classifiedJSON.titlestatus=new mongoose.Types.ObjectId(classifiedJSON.titlestatus);
+
+            if(classifiedJSON.vehicletype!==undefined)
                 classifiedJSON.vehicletype=new mongoose.Types.ObjectId(classifiedJSON.vehicletype);
+
+            if(classifiedJSON.employmenttype!==undefined)
                 classifiedJSON.employmenttype=new mongoose.Types.ObjectId(classifiedJSON.employmenttype);
+
+            if(classifiedJSON.sizeid!==undefined)
                 classifiedJSON.sizeid=new mongoose.Types.ObjectId(classifiedJSON.sizeid);
+
+            if(classifiedJSON.propulsionid!==undefined)
                 classifiedJSON.propulsionid=new mongoose.Types.ObjectId(classifiedJSON.propulsionid);
 
-            var newpost=new Classified(classifiedJSON);     
-            //if(!req.query.id)
-            //{
-                newpost.save(function (err, newpost) {
-                if (err) return console.error(err);
-                res.json(newpost);
+               
+                if(classifiedJSON._id==undefined)
+                {
+                    classifiedJSON._id=new mongoose.Types.ObjectId(classifiedJSON._id);
+                    var newpost=new Classified(classifiedJSON);  
+                    newpost.save(function (err, newpost) {
+                    if (err) return console.error(err);
+                    res.json(newpost);
                 });     
-            /*}
+                }
+            
             else
             {
-                newpost.findOneAndUpdate({_id:new mongoose.Types.ObjectId(req.query.id)},newClassified,function(err,result){
+                var newpost=new Classified(classifiedJSON);
+                newpost.findOneAndUpdate({_id:new mongoose.Types.ObjectId(classifiedJSON._id)},newClassified,function(err,result){
                     if(err) console.log(err);
                     console.log("Classified updated");
 
                 });
             }
-           */
+           
 
 
             
@@ -361,7 +393,6 @@ var passport = require('passport');
 
         //To display an existing classified
         app.get('/api/classified/show', function(req, res){
-        console.log(req.params);
         var filter={};
         filter.isactive=1;
         if(req.query.classified_id){
@@ -680,7 +711,7 @@ var passport = require('passport');
 
 
                 ]).exec(function(err,result){
-                    
+                    console.log(result);
                     res.json(result);
                     });
                     
@@ -701,12 +732,13 @@ var passport = require('passport');
 
      //To delete an existing classified
         app.get('/api/classified/delete',function(req,res){
-                Classified.findOneAndUpdate({_id:"5841fa7fd237416c062f5d5c"},{isactive : 0},function(err,update){
+                Classified.findOneAndUpdate({_id:req.query.id},{isactive : 0},function(err,update){
                                                 
                                                
                 if(err) throw err;
                 
                    console.log("Updated");
+                   res.json(update);
 
             });
            

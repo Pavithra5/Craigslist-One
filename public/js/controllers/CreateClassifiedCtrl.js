@@ -169,23 +169,32 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 		$('select#subcategoryDD').prop('disabled', true);
 		$scope.currFields = {};
 		$scope.currFields = categoryFields[$scope.categoryId];
-		console.log("categoryFields ");
-		console.log($scope.currFields);
-		console.log("subcategory");
-		console.log($scope.subcategoryValue);
-		console.log("subcategoryFields ");
-		console.log(subcategoryFields[$scope.subcategoryValue]);
 		angular.forEach(subcategoryFields[$scope.subcategoryValue], function(val, key) {
 			$scope.currFields[key] = val;
 		});
-
-		console.log("Final");
-		console.log($scope.currFields);
 	}
 
 	$scope.submit = function() {
 		$scope.formData.subcatid = $scope.subcategoryValue;
 		$scope.formData.userid = $scope.user;
+		$scope.formData.isactive = 1;
+		$scope.formData.pdate = new Date();
+		$scope.formData.udate = new Date();
+		if($scope.formData.furnished){
+			$scope.formData.furnished = 1;
+		} else {
+			$scope.formData.furnished = null;
+		}
+		if($scope.formData.laundry){
+			$scope.formData.laundry = 1;
+		}else {
+			$scope.formData.laundry = null;
+		}
+		if($scope.formData.parking){
+			$scope.formData.parking = 1;
+		} else {
+			$scope.formData.parking = null;
+		}
 		$http.get('/api/classified/save', {
 			params: {
 				user: $scope.formData

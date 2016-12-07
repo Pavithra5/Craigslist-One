@@ -134,7 +134,7 @@
 			<div ng-show={{currFields.size}} class="col-md-4 form-group">
   				<label for="size">Size:</label>
   				<select class="form-control" id="size" ng-model="formData.sizeid">
-					<option ng-repeat="size in sizes" value="{{size.size}}">{{size.size}}</option>
+					<option ng-repeat="size in sizes" value="{{size._id}}">{{size.size}}</option>
 				</select>
 			</div>
 
@@ -161,7 +161,7 @@
 			<div ng-show={{currFields.employmenttype}} class="col-md-4 form-group">
   				<label for="employmenttype">Employment Type:</label>
   				<select class="form-control" id="employmenttype" ng-model="formData.employmenttype">
-					<option ng-repeat="employment in employmenttypes" value="{{employment.type}}">{{employment.type}}</option>
+					<option ng-repeat="employment in employmenttypes" value="{{employment._id}}">{{employment.type}}</option>
 				</select>
 			</div>
 
@@ -203,7 +203,7 @@
 			<div ng-show={{currFields.housetype}} class="col-md-4 form-group">
   				<label for="housetype">House Type:</label>
   				<select class="form-control" id="housetype" ng-model="formData.housetype">
-					<option ng-repeat="house in housetypes" value="{{house.type}}">{{house.type}}</option>
+					<option ng-repeat="house in housetypes" value="{{house._id}}">{{house.type}}</option>
 				</select>
 			</div>
 

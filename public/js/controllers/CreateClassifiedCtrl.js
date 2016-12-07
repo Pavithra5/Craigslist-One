@@ -1,5 +1,10 @@
 // public/js/controllers/CreateClassifiedCtrl.js
-angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedController', function($scope, $http, $routeParams) {
+angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedController', function($scope, $http, $location,$routeParams, $cookies) {
+	if($cookies.get('user')) {
+		$scope.user = $cookies.get('user');	
+	} else {
+		$location.url('/');
+	}
 	var categoryFields = {};
 	var subcategoryFields = {};
 	$scope.subcategoryValue = "";
@@ -180,13 +185,15 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 
 	$scope.submit = function() {
 		$scope.formData.subcatid = $scope.subcategoryValue;
-		//console.log($scope.formData);
+		$scope.formData.userid = $scope.user;
 		$http.get('/api/classified/save', {
 			params: {
 				user: $scope.formData
 			}
 		}).then(function(response){
-			console.log(response);
+			if(response.data._id){
+				$location.url('/classified/'+response.data._id);
+			}
 		});
 	}
 });

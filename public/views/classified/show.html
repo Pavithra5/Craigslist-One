@@ -44,23 +44,23 @@
         <p ng-show="currFields.manufacturer && data.make">Manufacturer: {{data.make}}</p>
         <p ng-show="currFields.model && data.model">Model: {{data.model}}</p>
         <p ng-show="currFields.year && data.year">Year: {{data.year}}</p>
-        <p ng-show="currFields.transmission && data.transmissionid">Transmission type: {{data.transmissionid}}</p>
-        <p ng-show="currFields.fueltype && data.fueltype">Fuel type: {{data.fueltype}}</p>
+        <p ng-show="currFields.transmission && data.transmissionid">Transmission type: {{data.transmission[0].type}}</p>
+        <p ng-show="currFields.fueltype && data.fueltype">Fuel type: {{data.fuel[0].type}}</p>
         <p ng-show="currFields.odometer && data.odometer">Odometer reading: {{data.odometer}}</p>
         <p ng-show="currFields.dateavailable && data.dateavailable">Available from: {{data.dateavailable}}</p>
         <p ng-show="currFields.furnished && data.furnished">Furnished: {{data.furnished}}</p>  
         <p ng-show="currFields.laundry && data.laundry">Laundry: {{data.laundry}}</p>
         <p ng-show="currFields.parking && data.parking">Parking: {{data.parking}}</p>
-        <p ng-show="currFields.cylinders && data.cylinders">Cylinders: {{data.cylinders}}</p>
-        <p ng-show="currFields.drivetype && data.drivetype">Drive type: {{data.drivetype}}</p>
-        <p ng-show="currFields.color && data.paintcolor">Paint color: {{data.paintcolor}}</p>
-        <p ng-show="currFields.titlestatus && data.titlestatus">Title status: {{data.titlestatus}}</p>
-        <p ng-show="currFields.vehicletype && data.vehicletype">Vehicle type: {{data.vehicletype}}</p>
-        <p ng-show="currFields.employmenttype && data.employmenttype">Employment type: {{data.employmenttype}}</p>
+        <p ng-show="currFields.cylinders && data.cylinders">Cylinders: {{data.cylinders[0].cylinders}}</p>
+        <p ng-show="currFields.drivetype && data.drivetype">Drive type: {{data.drive[0].type}}</p>
+        <p ng-show="currFields.color && data.paintcolor">Paint color: {{data.paint}}</p>
+        <p ng-show="currFields.titlestatus && data.titlestatus">Title status: {{data.titlestatus[0].status}}</p>
+        <p ng-show="currFields.vehicletype && data.vehicletype">Vehicle type: {{data.vehicletype[0].type}}</p>
+        <p ng-show="currFields.employmenttype && data.employmenttype">Employment type: {{data.employmenttype[0].type}}</p>
         <p ng-show="currFields.dealer && data.dealer">Owner/Dealer: {{data.dealer}}</p>
         <p ng-show="currFields.privateroom && data.privateroom">Private room: {{data.privateroom}}</p>
         <p ng-show="currFields.privatebath && data.privatebath">Private bath: {{data.privatebath}}</p>
-        <p ng-show="currFields.size && data.sizeid">Size: {{data.sizeid}}</p>
+        <p ng-show="currFields.size && data.sizeid">Size: {{data.vehiclesize[0].size}}</p>
         <p ng-show="currFields.area && data.area">Propulsion: {{data.propulsionid}}</p>
     </div>
 </div>

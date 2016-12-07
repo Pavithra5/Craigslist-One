@@ -1,6 +1,7 @@
 // public/js/controllers/CreateClassifiedCtrl.js
 angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedController', function($scope, $http, $routeParams) {
-
+	var categoryFields = {};
+	var subcategoryFields = {};
 	$scope.subcategoryValue = "";
 
 	$scope.formData = {};
@@ -29,22 +30,6 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 		"1998",
 		"1997"
 	];
-
-	$http.get('/api/categoryFields')
-	.success(function(data){
-		$scope.categoryFields = data;
-	})
-	.error(function(data){
-       console.log(data);
-	});
-
-	$http.get('/api/subcategoryFields')
-	.success(function(data){
-		$scope.subcategoryFields = data;
-	})
-	.error(function(data){
-       console.log(data);
-	});
 
 
 	$http.get('/api/categories/')
@@ -149,6 +134,21 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 	$scope.categoryChange = function() {
 		$scope.subcategoryValue = "";
 		$scope.currFields = {};
+		$http.get('/api/categoryFields')
+		.success(function(data){
+			categoryFields = data;
+		})
+		.error(function(data){
+	       console.log(data);
+		});
+
+		$http.get('/api/subcategoryFields')
+		.success(function(data){
+			subcategoryFields = data;
+		})
+		.error(function(data){
+	       console.log(data);
+		});
 		$scope.categoryId = $('input[name="category-radio"]:checked').val();
 		angular.forEach($scope.categories, function(value){
 			if(value._id == $scope.categoryId) {
@@ -156,17 +156,26 @@ angular.module('CreateClassifiedCtrl', []).controller('CreateClassifiedControlle
 			}
 		});
 		$('select#subcategoryDD').prop('disabled', false);
-
 	}
 
 
 
 	$scope.subcategoryChange = function() {
 		$('select#subcategoryDD').prop('disabled', true);
-		$scope.currFields = $scope.categoryFields[$scope.categoryId];
-		angular.forEach($scope.subcategoryFields[$scope.subcategoryValue], function(val, key) {
+		$scope.currFields = {};
+		$scope.currFields = categoryFields[$scope.categoryId];
+		console.log("categoryFields ");
+		console.log($scope.currFields);
+		console.log("subcategory");
+		console.log($scope.subcategoryValue);
+		console.log("subcategoryFields ");
+		console.log(subcategoryFields[$scope.subcategoryValue]);
+		angular.forEach(subcategoryFields[$scope.subcategoryValue], function(val, key) {
 			$scope.currFields[key] = val;
 		});
+
+		console.log("Final");
+		console.log($scope.currFields);
 	}
 
 	$scope.submit = function() {

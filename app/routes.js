@@ -1284,8 +1284,12 @@ var passport = require('passport');
     //To save user details
         app.get('/api/user/create',function(req,res){
             var userJson = JSON.parse(req.query.user);
-            
-            userJson.state_id = new mongoose.Types.ObjectId(userJson.state_id);
+            User.find({email:userJson.email},function(err,user){
+                console.log(user[0])
+                if(err)console.log(err)
+                    else if(user[0]==null)
+                    {
+                        userJson.state_id = new mongoose.Types.ObjectId(userJson.state_id);
 
             var newuser=new User(userJson);     
             
@@ -1310,7 +1314,16 @@ var passport = require('passport');
 
                 });  
             });              
+            
+            
+                    }
 
+                    else
+                    {
+                        res.json({msg:"exists"});
+                    }
+            })
+            
         });
 
            

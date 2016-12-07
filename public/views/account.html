@@ -14,6 +14,7 @@
 		    <thead>
 		      <tr>
 		        <th>Title</th>
+		        <th ng-if="isAdmin">Posted By</th>
 		        <th>Date Posted</th>
 		        <th>Category / Subcategory</th>
 		        <th>Actions</th>
@@ -22,6 +23,7 @@
 		    <tbody>
 		      <tr ng-repeat="classified in classifieds">
 		  		<td><a href="/classified/{{classified._id}}" style="font-weight: bold;">{{classified.shortdesc}}</a></td>
+		  		<td ng-if="isAdmin">{{classified.user[0].name}}</td>
 		  		<td>{{classified.pdate}}</td>
 		  		<td>{{classified.categ[0].name}} / {{classified.subcateg[0].name}}</td>
 		  		<td><button class="btn btn-default" ng-click="editClassified(classified._id)">Edit</button> <button class="btn btn-warning" ng-click="deleteClassified(classified._id)">Delete</button></td>
@@ -61,7 +63,7 @@
     				<div>City: <label>{{user.city}}</label></div>
     			</div>
     			<div class="row">
-    				<button class="btn btn-default">Change Password</button>
+    				<!-- <button class="btn btn-default">Change Password</button> -->
     			</div>
     		</div>
     	</div>

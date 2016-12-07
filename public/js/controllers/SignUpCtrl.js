@@ -22,8 +22,11 @@ angular.module('SignUpCtrl', []).controller('SignUpController', function($scope,
 						password: $scope.password
 					}
 				}).then(function(response){
-					console.log(response);
-					$location.url('/');
+					if(response.data.err) {
+						alert("User already exists!");
+					} else {
+						$location.url('/');
+					}
 				});
 			}
 		}

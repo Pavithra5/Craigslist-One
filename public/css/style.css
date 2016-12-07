@@ -23,6 +23,10 @@ div.my-account{
     color: #f3f3f3;
 }
 
+.btn-craigslist:hover {
+    color: #f3f3f3;
+}
+
 a {
 	color: #500080;
 }

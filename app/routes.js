@@ -1320,7 +1320,7 @@ var passport = require('passport');
 
                     else
                     {
-                        res.json({msg:"exists"});
+                        res.json({err:"exists"});
                     }
             })
             

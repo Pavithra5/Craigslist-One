@@ -7,6 +7,7 @@ angular.module('AccountCtrl', []).controller('AccountController', function($scop
 			}
 		}).then(function(response){
 			$scope.user = response.data[0];
+			$scope.isAdmin = $scope.user.roleid == 1;
 			updateListing();
 		});
 
@@ -29,13 +30,20 @@ angular.module('AccountCtrl', []).controller('AccountController', function($scop
 	}
 
 	function updateListing() {
-		$http.get('/api/classified/show', {
-			params: {
-				'user_id': $scope.user._id
+			if($scope.isAdmin) {
+				$http.get('/api/classified/show').then(function(response){
+					$scope.classifieds = response.data;
+				});
+			} else {
+				$http.get('/api/classified/show', {
+				params: {
+					'user_id': $scope.user._id
+				}
+				}).then(function(response){
+					$scope.classifieds = response.data;
+				});
 			}
-			}).then(function(response){
-				$scope.classifieds = response.data;
-			});
+				
 
 			$http.get('/api/classified/favorite', {
 			params: {

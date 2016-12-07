@@ -48,7 +48,8 @@ var classifiedSchema = new Schema({
 	privateroom:Number,
 	privatebath:Number,
 	sizeid:Schema.Types.ObjectId,
-	propulsionid:Schema.Types.ObjectId
+	propulsionid:Schema.Types.ObjectId,
+	zip:Number
 });
 
 

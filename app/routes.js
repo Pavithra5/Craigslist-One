@@ -218,12 +218,7 @@ var passport = require('passport');
             var classifiedJSON=JSON.parse(req.query.user);
             classifiedJSON.catid=new mongoose.Types.ObjectId(classifiedJSON.catid);
             classifiedJSON.subcatid=new mongoose.Types.ObjectId(classifiedJSON.subcatid);
-            /*classifiedJSON.isactive=1;*/
-            
-            
-
-            /*if(classifiedJSON.userid!==undefined)
-               classifiedJSON.userid=new mongoose.Types.ObjectId(classifiedJSON.userid);*/
+            console.log("ZIP "+classifiedJSON.zip)
 
             if(classifiedJSON.conditionid!==undefined)
                 classifiedJSON.conditionid=new mongoose.Types.ObjectId(classifiedJSON.conditionid);
@@ -273,11 +268,12 @@ var passport = require('passport');
                 }
             
             else
-            {
-                var newpost=new Classified(classifiedJSON);
-                newpost.findOneAndUpdate({_id:new mongoose.Types.ObjectId(classifiedJSON._id)},classifiedJSON,function(err,result){
+            {   
+                
+                
+                Classified.findOneAndUpdate({_id:new mongoose.Types.ObjectId(classifiedJSON._id)},classifiedJSON,function(err,result){
                     if(err) console.log(err);
-                    console.log("Classified updated");
+                    res.json(result);
 
                 });
             }
@@ -608,7 +604,6 @@ var passport = require('passport');
 
 
                 ]).exec(function(err,result){
-                    console.log(result);
                     res.json(result);
                     });
                     
@@ -899,7 +894,7 @@ var passport = require('passport');
             {
                 updateUser.contacttime=req.params.ctime;
             }
-            User.findOneAndUpdate({_id:req.params.uid},{updateUser},function(err,user){
+            User.findOneAndUpdate({_id:req.params.uid},updateUser,function(err,user){
                 if (err) throw err;
                 console.log("User updated");
             });
@@ -915,7 +910,7 @@ var passport = require('passport');
 
     //To get a single user object
         app.get('/api/user',function(req,res){
-           console.log(req.query);
+           
             User.find({_id:req.query.id},function(err,resp){
                 res.json(resp);
             })
@@ -936,7 +931,7 @@ var passport = require('passport');
 
                 var userPromise = getUser(userJson.email);
                 userPromise.then(function(user){
-                    console.log(user);
+                   
                     var newpassword=new Password({
                         _id: null,
                         userid: user[0]._id,
@@ -970,10 +965,10 @@ var passport = require('passport');
                         err:"user not found"
                     };
                 if(user.length > 0) {
-                    console.log(user);
+                   
                     var passPromise = Password.find({userid: user[0]._id,password:req.query.password}).exec();
                     passPromise.then(function(pass){
-                        console.log(pass);
+                     
                         if(pass.length > 0) {
                             res.json(user);
                         }

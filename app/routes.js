@@ -606,7 +606,7 @@ var passport = require('passport');
                 ]).exec(function(err,result){
 
                     
-                    console.log(result);
+                    res.json(result)
                     
                     });
                     
@@ -976,7 +976,12 @@ var passport = require('passport');
                                                
                 if(err) throw err;
                 
-                   console.log("Updated");
+                   console.log("Updated user id"+update.userid);
+                    Favorite.findOneAndUpdate({user_id:update.userid,classified_id:req.query.id},{isactive : 0},function(error,favresult){
+                        if(error) console.log(error)
+                            else
+                                console.log("Favorite deleted")
+                   })
                    res.json(update);
 
             });

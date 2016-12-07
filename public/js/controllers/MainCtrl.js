@@ -1,6 +1,6 @@
 // public/js/controllers/MainCtrl.js
 angular.module('MainCtrl', []).controller('MainController', function($scope, $http, $location, $cookies) {
-	
+	$scope.searchString="";
 	$scope.user = $cookies.get('user');
 	if($scope.user) {
 		$http.get('/api/user', {
@@ -41,6 +41,12 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
 		$cookies.remove('user');
 		$scope.user = null;
 		$location.url('/');
+	}
+
+	$scope.search = function() {
+		if($scope.searchString) {
+			$location.url('/classifieds?search='+$scope.searchString);
+		}
 	}
 
 });

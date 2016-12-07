@@ -1,9 +1,16 @@
 // public/js/controllers/ClassifiedCtrl.js
-angular.module('ClassifiedCtrl', []).controller('ClassifiedController', function($scope, $http, $routeParams) {
+angular.module('ClassifiedCtrl', []).controller('ClassifiedController', function($scope, $http, $routeParams,$cookies) {
 	
 	$http.get('/api/classified/show', {params: { classified_id : $routeParams.id}})
         .success(function(data) {
             $scope.data = data[0];
+            if($cookies.get('user')){
+				$scope.user = $cookies.get('user');
+				if($scope.data.userid != $scope.user){
+					$scope.canFavourite = true;
+					
+				}
+			}
 			$http.get('/api/categoryFields')
 			.then(function(response){
 				$scope.categoryFields = response.data;

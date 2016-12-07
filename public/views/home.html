@@ -10,9 +10,9 @@
 	</div>
 	<div class="col-md-4">
 		<div class="input-group input-group-lg">
-      <input type="text" class="form-control" placeholder="Search for...">
+      <input type="text" class="form-control" ng-model="searchString" placeholder="Search for...">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
+        <button class="btn btn-default" ng-click="search()" type="button">Go!</button>
       </span>
     </div>
 	</div>

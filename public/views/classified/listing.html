@@ -5,49 +5,35 @@
 		<h2 class="page-header">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{{homeUrl}}">Home</a></li>
-				<li class="breadcrumb-item"><a href="#">{{category}}</a></li>
-				<li class="breadcrumb-item active">{{subcategory}}</li>
+				<li ng-if="category" class="breadcrumb-item"><a href="{{catUrl}}">{{category}}</a></li>
+				<li ng-if="subcategory" class="breadcrumb-item active">{{subcategory}}</li>
 			</ol>
 		</h2>
 		<div class="page-header listing-filter">
-				
-			<h3><a href="#" class="fa fa-angle-up">Filters</a></h3>
-			
-			<div class="listing-filter-items">
-				
-				<div class="btn-group col-md-3" role="group" aria-label="Basic example">
-		  			<button type="button" class="btn btn-primary">all</button>
-		  			<button type="button" class="btn btn-secondary">dealers</button>
-		  			<button type="button" class="btn btn-secondary">owner</button>
-				</div>
-
-				<div class="input-group col-md-3">
-					<span class="input-group-addon">
-						<input type="checkbox" aria-label="Checkbox for following text input"> search title only
-					</span>
-					<span class="input-group-addon">
-						<input type="checkbox" aria-label="Checkbox for following text input"> has image
-					</span>
-					<span class="input-group-addon">
-						<input type="checkbox" aria-label="Checkbox for following text input"> posted today
-					</span>
-				</div>
-			
-			</div>
+			<!-- 	
+			<div class="col-md-3 form-group">
+  				<label for="pagination">Page:</label>
+  				<select class="form-control" id="pagination" ng-model="page">
+					<option ng-repeat="p in pages"value="{{p}}">{{p}}</option>
+				</select>
+			</div> -->
 			
 		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div ng-repeat="listItem in data" class="col-md-4 listing-item">
-		<a href="#">
-			<img class="img-responsive" src="{{listItem.image}}" alt="">
-		</a>
-		<h3>
-			<small>{{listItem.pdate}}</small>
-			<a href="/classified/{{listItem._id}}">{{listItem.shortdesc}}</a>
-			<small>${{listItem.price}}</small>
-		</h3>
+	<div class="col-md-4" ng-repeat="listItem in data">
+		<div class="col-md-12 listing-item">
+			<a href="/classified/{{listItem._id}}">
+				<img ng-if="listItem.image" class="img-responsive" src="{{listItem.image}}" alt="">
+				<img ng-if="!listItem.image" class="img-responsive" src="../imgs/noimage.jpg" alt="no image">
+			</a>
+			<h3>
+				<a href="/classified/{{listItem._id}}">{{listItem.shortdesc}} <small>{{listItem.location}}</small></a>
+				<small>{{listItem.price | currency}}</small>
+				
+			</h3>
+		</div>
 	</div>
 </div>

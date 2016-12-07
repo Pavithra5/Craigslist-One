@@ -10,11 +10,15 @@
         <h1>{{data.shortdesc}} ({{data.location}})</h1>
         <h3 ng-show="currFields.price && data.price">Price: {{data.price | currency}}</h3>
     </div>
+    <div class="col-md-2">
+        <button ng-if="canFavourite" ng-class="{'disabled': isFavourite}"  class="btn btn-craigslist pull-left"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8" style="text-align: center;">
-        <img src='{{data.image}}'/>
+        <img ng-if="data.image" class="img-responsive" src="{{data.image}}" alt="">
+        <img ng-if="!data.image" class="img-responsive" src="../imgs/noimage.jpg" alt="no image">
     </div>
 </div>
 

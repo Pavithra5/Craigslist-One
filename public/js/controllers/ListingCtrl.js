@@ -1,7 +1,11 @@
 // public/js/controllers/ClassifiedCtrl.js
 angular.module('ListingCtrl', []).controller('ListingController', function($scope, $http, $routeParams) {
-	$scope.homeUrl = window.location.origin;
-
+	$scope.homeUrl = "/";
+	$scope.catUrl = "/classifieds?cid="+$routeParams.cid;
+	/*$scope.pages = [1,2,3,4];
+	$scope.page = $scope.pages[0];
+	$('select#pagination').val(1);
+*/
 	$http.get('/api/categories/')
 	.success(function(data){
 		angular.forEach(data, function(value){

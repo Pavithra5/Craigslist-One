@@ -37,7 +37,7 @@ img.logo {
 
 
 div.home-date {
-    font-size: 2.5em;
+    font-size: 2em;
 }
 
 div.home-header {
@@ -69,4 +69,16 @@ div.cd-right p {
 	padding: 10px;
 	border: 1px solid #f0f0f0;
 	border-radius: 25px;
+}
+
+div.listing-item {
+	border: 1px solid #f0f0f0;
+	border-radius: 25px;
+	background-color: #f0f0f0;
+	padding: 10px;
+	margin: 10px 0; 
+}
+
+.page-header.listing-filter {
+    overflow: hidden;
 }

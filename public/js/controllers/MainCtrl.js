@@ -30,7 +30,11 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
 	}
 
 	$scope.myAccount = function() {
-		$location.url('/account')
+		$location.url('/account');
+	}
+
+	$scope.login = function() {
+		$location.url('/login');
 	}
 
 	$scope.logout = function() {

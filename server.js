@@ -6,10 +6,14 @@ var app            	= express();
 var bodyParser     	= require('body-parser');
 var methodOverride 	= require('method-override');
 var mongoose		= require('mongoose');
+const passport 		= require('passport')  
+const session 		= require('express-session')  
+const RedisStore 	= require('connect-redis')(session)
 // configuration ===========================================
     
 // config files
 var db = require('./config/db');
+var index = require('./config/index');
 
 // set our port
 var port = process.env.PORT || 8080; 
@@ -18,6 +22,18 @@ var port = process.env.PORT || 8080;
 // (uncomment after you enter in your own credentials in config/db.js)
 
  mongoose.connect(db.url); 
+
+ app.use(session({  
+  store: new RedisStore({
+    url: index.url
+  }),
+  secret: index.secret,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());  
+app.use(passport.session());  
+
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json 

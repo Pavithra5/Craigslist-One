@@ -1,1 +1,1 @@
-angular.module('CraigslistApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'CreateClassifiedCtrl', 'ClassifiedCtrl', 'ListingCtrl', 'LoginCtrl', 'SignUpCtrl']);
+angular.module('CraigslistApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'CreateClassifiedCtrl', 'ClassifiedCtrl', 'ListingCtrl', 'LoginCtrl', 'SignUpCtrl', 'AccountCtrl']);

@@ -15,7 +15,7 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
 			} else {
 				$scope.err = "";
 				$scope.$root.user = data[0];
-				$location.url('/');
+				$location.url('/account');
 			}
 		});
 	}

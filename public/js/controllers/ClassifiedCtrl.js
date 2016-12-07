@@ -11,6 +11,7 @@ angular.module('ClassifiedCtrl', []).controller('ClassifiedController', function
 				.then(function(data){
 					$scope.subcategoryFields = data;
 					$scope.currFields = $scope.categoryFields[$scope.data.catid];
+					$scope.subcategoryValue = $scope.data.subcatid;
 					angular.forEach($scope.subcategoryFields[$scope.subcategoryValue], function(val, key) {
 						$scope.currFields[key] = val;
 					});

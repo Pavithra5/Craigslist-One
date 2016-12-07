@@ -19,11 +19,20 @@
             controller: 'SignUpController'
         })
 
+        .when('/account', {
+            templateUrl: 'views/account.html',
+            controller: 'AccountController'
+        })
+
         .when('/classified/new', {
             templateUrl: 'views/classified/create.html',
             controller: 'CreateClassifiedController'
         })
 
+        .when('/classified/:id/edit', {
+            templateUrl: 'views/classified/create.html',
+            controller: 'CreateClassifiedController'
+        })
         
         .when('/classified/:id', {
             templateUrl: 'views/classified/show.html',
